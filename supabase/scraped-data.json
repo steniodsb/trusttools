@@ -1,0 +1,397 @@
+{
+  "scraped_at": "2026-05-12",
+  "source": "https://www.trusttools.com.br/",
+  "about": {
+    "founded": "2021",
+    "headline": "Conheça nossa linha de construção",
+    "history": "A Trust Tools foi fundada em 2021 quando dois empreendedores com mais de duas décadas de experiência em comércio internacional e ferramentas abrasivas decidiram criar uma abordagem de negócio inovadora. A empresa opera uma matriz em Diadema-SP (região do ABCD Paulista) com um amplo estoque de ferramentas prontas para uso, além de uma filial em Jundiaí-SP especializada no desenvolvimento e manutenção customizada de ferramentas diamantadas.",
+    "mission": "Prover soluções inovadoras e de alta qualidade em ferramentas para diversos segmentos, entregando atendimento eficiente, confiável e focado na satisfação do cliente.",
+    "vision": "Ser reconhecida como a principal empresa de referência em ferramentas no Brasil, distinguindo-se pela inovação, excelência no atendimento e compromisso com o desenvolvimento sustentável do setor.",
+    "values": [
+      {
+        "name": "Qualidade",
+        "description": "Produtos e serviços que excedem as expectativas dos clientes"
+      },
+      {
+        "name": "Inovação",
+        "description": "Melhoria contínua e integração de novas tecnologias"
+      },
+      {
+        "name": "Sustentabilidade",
+        "description": "Respeito ambiental em todas as operações de negócio"
+      },
+      {
+        "name": "Ética",
+        "description": "Transparência e integridade em todas as relações"
+      },
+      {
+        "name": "Foco no Cliente",
+        "description": "Priorizar as necessidades e o sucesso do cliente"
+      }
+    ],
+    "locations": [
+      {
+        "type": "Matriz",
+        "street": "R. Martins Fontes, 164 - Taboão",
+        "city": "Diadema",
+        "state": "SP",
+        "postal_code": "09940-330"
+      },
+      {
+        "type": "Filial",
+        "street": "Rod. Pres. Tancredo de Almeida Neves, 59400 - Jardim Santa Gertrudes",
+        "city": "Jundiaí",
+        "state": "SP",
+        "postal_code": "13205-005"
+      }
+    ]
+  },
+  "contact": {
+    "phones": ["(11) 2668-2051", "(11) 97831-1084"],
+    "whatsapp": "(11) 97831-1084",
+    "email": "comercial@trusttools.com.br",
+    "social_media": {
+      "instagram": "https://www.instagram.com/trusttoolsbr/",
+      "facebook": "https://www.facebook.com/Trusttoolscomercial",
+      "linkedin": "https://br.linkedin.com/company/trust-tools-importacao-e-exportacao-ltda"
+    },
+    "contact_form_fields": ["Nome", "Sobrenome", "E-mail", "Mensagem"]
+  },
+  "categories": [
+    {
+      "slug": "construcao",
+      "name": "Construção",
+      "description": "Ferramentas para corte e retrabalho de concretos em geral, incluindo concreto protendido, pré-moldado e lajes alveolares.",
+      "page_url": "https://www.trusttools.com.br/cópia-trust-tools",
+      "image_url": "https://static.wixstatic.com/media/nsplsh_29cdae0f96564eed99fddfcd94e09a7a~mv2.jpg",
+      "products": [
+        {
+          "name": "Serras Diamantadas",
+          "slug": "serras-diamantadas-construcao",
+          "short_description": "Ferramentas para corte de concretos em geral",
+          "long_description": "Ferramentas para corte de concretos em geral, incluindo concreto protendido, pré-moldado, lajes alveolares, concreto curado e aplicações estruturais. Disponíveis nas versões novas e repastilhadas.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "250 mm a 1300 mm"},
+          "applications": ["Concreto protendido", "Concreto pré-moldado", "Lajes alveolares", "Concreto curado", "Aplicações estruturais"],
+          "variants": ["Novas", "Repastilhadas"],
+          "product_url": null
+        },
+        {
+          "name": "Cálices e Coroas Diamantadas",
+          "slug": "calices-coroas-diamantadas-construcao",
+          "short_description": "Ferramentas para retrabalho e corte de concreto",
+          "long_description": "Cálices e coroas diamantadas para retrabalho e corte de concreto. Disponíveis nas versões novas e repastilhadas.",
+          "image_urls": [],
+          "specs": {"Tamanho": "1/2\" a 20\""},
+          "applications": ["Retrabalho de concreto", "Corte de concreto"],
+          "variants": ["Novas", "Repastilhadas"],
+          "product_url": null
+        },
+        {
+          "name": "Pratos para Lixadeiras",
+          "slug": "pratos-lixadeiras-construcao",
+          "short_description": "Ferramentas para acabamento e retrabalho de concreto",
+          "long_description": "Pratos para lixadeiras destinados ao acabamento e retrabalho de concreto. Disponíveis com rosca e sem rosca.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "100 mm a 180 mm"},
+          "applications": ["Acabamento de concreto", "Retrabalho de concreto"],
+          "variants": ["Com rosca", "Sem rosca"],
+          "product_url": null
+        }
+      ]
+    },
+    {
+      "slug": "refratarios",
+      "name": "Refratários",
+      "description": "Ferramentas específicas para corte, furo e desbaste de materiais refratários e cerâmicas refratárias, garantindo alta performance em aplicações exigentes.",
+      "page_url": "https://www.trusttools.com.br/cópia-construção",
+      "image_url": "https://static.wixstatic.com/media/nsplsh_c5421a81cf0a466699ca1429d1a2108e~mv2.jpg",
+      "products": [
+        {
+          "name": "Serras Diamantadas",
+          "slug": "serras-diamantadas-refratarios",
+          "short_description": "Serras diamantadas para corte de materiais refratários",
+          "long_description": "Serras diamantadas para corte de materiais refratários e cerâmicas refratárias com máxima resistência e precisão.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "250 mm a 600 mm"},
+          "applications": ["Corte de refratários", "Corte de cerâmicas refratárias"],
+          "product_url": null
+        },
+        {
+          "name": "Fresas Diamantadas",
+          "slug": "fresas-diamantadas-refratarios",
+          "short_description": "Fresas diamantadas para desbaste e usinagem",
+          "long_description": "Fresas diamantadas para desbaste e usinagem de materiais refratários, com diversidade de diâmetros para diferentes aplicações.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "200 mm a 800 mm"},
+          "applications": ["Desbaste de refratários", "Usinagem de refratários"],
+          "product_url": null
+        },
+        {
+          "name": "Pratos para Lixadeiras",
+          "slug": "pratos-lixadeiras-refratarios",
+          "short_description": "Pratos com ou sem rosca para acabamento",
+          "long_description": "Pratos para lixadeiras destinados ao acabamento de superfícies de materiais refratários. Disponíveis com rosca e sem rosca.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "100 mm a 180 mm"},
+          "applications": ["Acabamento de refratários"],
+          "variants": ["Com rosca", "Sem rosca"],
+          "product_url": null
+        },
+        {
+          "name": "Brocas Diamantadas",
+          "slug": "brocas-diamantadas-refratarios",
+          "short_description": "Brocas diamantadas em múltiplos comprimentos",
+          "long_description": "Brocas diamantadas para furação de precisão em materiais térmicos de alta dureza. Disponíveis em diversos comprimentos.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "6 mm a 100 mm"},
+          "applications": ["Furação de precisão", "Materiais térmicos de alta dureza"],
+          "product_url": null
+        }
+      ]
+    },
+    {
+      "slug": "pedras",
+      "name": "Pedras",
+      "description": "Soluções completas em ferramentas para corte, furo, desbaste e acabamento em mármores, granitos e pedras preciosas, com alta durabilidade e precisão.",
+      "page_url": "https://www.trusttools.com.br/cópia-construção-1",
+      "image_url": "https://static.wixstatic.com/media/651430_3dadbdc8b0344ac08646e4a63d2c2193~mv2.jpg",
+      "products": [
+        {
+          "name": "Serras Diamantadas",
+          "slug": "serras-diamantadas-pedras",
+          "short_description": "Serras diamantadas para corte de pedras",
+          "long_description": "Serras diamantadas para corte de mármores, granitos e pedras preciosas com alta durabilidade.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "250 mm a 900 mm"},
+          "applications": ["Mármore", "Granito", "Pedras preciosas"],
+          "product_url": null
+        },
+        {
+          "name": "Pratos para Lixadeiras",
+          "slug": "pratos-lixadeiras-pedras",
+          "short_description": "Pratos com rosca para acabamento de pedras",
+          "long_description": "Pratos para lixadeiras com rosca para desbaste e acabamento em pedras.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "100 mm a 180 mm"},
+          "applications": ["Desbaste de pedras", "Acabamento de pedras"],
+          "variants": ["Com rosca"],
+          "product_url": null
+        },
+        {
+          "name": "Brocas Diamantadas",
+          "slug": "brocas-diamantadas-pedras",
+          "short_description": "Brocas diamantadas para furação de pedras",
+          "long_description": "Brocas diamantadas para furação em mármores, granitos e pedras preciosas.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "6 mm a 180 mm"},
+          "applications": ["Mármore", "Granito", "Pedras preciosas"],
+          "product_url": null
+        },
+        {
+          "name": "Adesivo PU",
+          "slug": "adesivo-pu",
+          "short_description": "Adesivo poliuretano em múltiplas cores",
+          "long_description": "Adesivo poliuretano (PU) para colagem e fixação em aplicações com pedras. Disponível em preto, branco, cinza e transparente.",
+          "image_urls": [],
+          "specs": {"Cores": "preto, branco, cinza, transparente"},
+          "applications": ["Colagem de pedras", "Fixação"],
+          "variants": ["Preto", "Branco", "Cinza", "Transparente"],
+          "product_url": null
+        }
+      ]
+    },
+    {
+      "slug": "segmentos",
+      "name": "Segmentos",
+      "description": "Segmentos diamantados compostos por diamante industrial, ligas metálicas, cobalto e tungstênio, ideais para corte e refino de materiais diversos.",
+      "page_url": "https://www.trusttools.com.br/cópia-pedras",
+      "image_url": "https://static.wixstatic.com/media/nsplsh_3055386f6e755a6d513430~mv2_d_3114_3892_s_4_2.jpg",
+      "products": [
+        {
+          "name": "Segmentos para Coroas e Cálices",
+          "slug": "segmentos-coroas-calices",
+          "short_description": "Segmentos diamantados para coroas e cálices",
+          "long_description": "Segmentos diamantados de alto desempenho compostos por diamante industrial, ligas metálicas, cobalto e tungstênio, para coroas e cálices.",
+          "image_urls": ["https://static.wixstatic.com/media/651430_6ba7e031cfa24bb59a1693e12ec181e4~mv2.png"],
+          "specs": {"Tamanho": "1 1/2\" a 20\""},
+          "applications": ["Corte de materiais diversos", "Refino"],
+          "product_url": null
+        },
+        {
+          "name": "Segmentos para Fresas",
+          "slug": "segmentos-fresas",
+          "short_description": "Segmentos diamantados para fresas",
+          "long_description": "Segmentos diamantados de alto desempenho para fresas, ideais para corte e refino de diversos materiais.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "200 mm a 800 mm"},
+          "applications": ["Corte", "Refino"],
+          "product_url": null
+        },
+        {
+          "name": "Segmentos para Serras Diamantadas",
+          "slug": "segmentos-serras-diamantadas",
+          "short_description": "Segmentos para serras diamantadas",
+          "long_description": "Segmentos diamantados compostos por diamante industrial, ligas metálicas, cobalto e tungstênio para serras diamantadas.",
+          "image_urls": [],
+          "specs": {"Diâmetro": "250 mm a 1300 mm"},
+          "applications": ["Corte", "Refino"],
+          "product_url": null
+        },
+        {
+          "name": "Segmentos sob Medida",
+          "slug": "segmentos-sob-medida",
+          "short_description": "Segmentos diamantados em dimensões customizadas",
+          "long_description": "Segmentos sob medida para aplicações customizadas em cálices, coroas, serras, fresas e brocas coroa.",
+          "image_urls": [],
+          "specs": {"Dimensões": "Sob medida / customizadas"},
+          "applications": ["Cálices", "Coroas", "Serras", "Fresas", "Brocas coroa"],
+          "product_url": null
+        }
+      ]
+    },
+    {
+      "slug": "ferramentas-diversas",
+      "name": "Ferramentas Diversas",
+      "description": "Ampla variedade de ferramentas manuais e acessórios profissionais para uso em metal, madeira, alvenaria e outros materiais.",
+      "page_url": "https://www.trusttools.com.br/cópia-segmentos",
+      "image_url": "https://static.wixstatic.com/media/nsplsh_4c7470684e545848514163~mv2.jpg",
+      "products": [
+        {
+          "name": "Alicates",
+          "slug": "alicates",
+          "short_description": "Alicates profissionais em diversos tipos",
+          "long_description": "Alicates universais, de bico, de corte e arrebitadores para uso profissional em metal, madeira, alvenaria e manutenção geral.",
+          "image_urls": [],
+          "specs": {},
+          "applications": ["Metal", "Madeira", "Alvenaria", "Manutenção geral"],
+          "variants": ["Universal", "De bico", "Corte", "Arrebitador"],
+          "product_url": null
+        },
+        {
+          "name": "Chaves",
+          "slug": "chaves",
+          "short_description": "Chaves Torx, Allen, combinadas e catraca",
+          "long_description": "Linha de chaves profissionais incluindo Torx, Allen, combinada e catraca para metal, madeira, alvenaria e manutenção geral.",
+          "image_urls": [],
+          "specs": {},
+          "applications": ["Metal", "Madeira", "Alvenaria", "Manutenção geral"],
+          "variants": ["Torx", "Allen", "Combinada", "Catraca"],
+          "product_url": null
+        },
+        {
+          "name": "Escovas de Aço",
+          "slug": "escovas-de-aco",
+          "short_description": "Escovas de aço para limpeza e preparação",
+          "long_description": "Escovas de aço profissionais para limpeza e preparação de superfícies.",
+          "image_urls": [],
+          "specs": {},
+          "applications": ["Metal", "Limpeza", "Preparação de superfícies"],
+          "product_url": null
+        },
+        {
+          "name": "Discos de Corte",
+          "slug": "discos-de-corte",
+          "short_description": "Discos de corte para aço, ferro, madeira e alvenaria",
+          "long_description": "Discos de corte para aplicações em diferentes materiais: aço, ferro, madeira e alvenaria.",
+          "image_urls": [],
+          "specs": {},
+          "applications": ["Aço", "Ferro", "Madeira", "Alvenaria"],
+          "variants": ["Aço", "Ferro", "Madeira", "Alvenaria"],
+          "product_url": null
+        },
+        {
+          "name": "Discos de Desbaste",
+          "slug": "discos-de-desbaste",
+          "short_description": "Discos de desbaste para aço, ferro e alvenaria",
+          "long_description": "Discos de desbaste para metal e alvenaria, indicados para acabamento e remoção de material.",
+          "image_urls": [],
+          "specs": {},
+          "applications": ["Aço", "Ferro", "Alvenaria"],
+          "variants": ["Aço", "Ferro", "Alvenaria"],
+          "product_url": null
+        },
+        {
+          "name": "Maletas de Ferramentas",
+          "slug": "maletas-de-ferramentas",
+          "short_description": "Maletas para organização e transporte",
+          "long_description": "Maletas de ferramentas para armazenamento e organização profissional.",
+          "image_urls": [],
+          "specs": {},
+          "applications": ["Armazenamento", "Organização"],
+          "product_url": null
+        },
+        {
+          "name": "Brocas",
+          "slug": "brocas-ferramentas-diversas",
+          "short_description": "Brocas para aço, alvenaria e madeira",
+          "long_description": "Linha completa de brocas para furação em aço, alvenaria e madeira.",
+          "image_urls": [],
+          "specs": {},
+          "applications": ["Aço", "Alvenaria", "Madeira"],
+          "variants": ["Aço", "Alvenaria", "Madeira"],
+          "product_url": null
+        }
+      ]
+    },
+    {
+      "slug": "repastilhamento",
+      "name": "Repastilhamento",
+      "description": "Serviço de repastilhamento de serras, coroas, cálices e fresas com economia de até 40%. Processos sustentáveis em conformidade com NR12.",
+      "page_url": "https://www.trusttools.com.br/repastilhamento",
+      "image_url": "https://static.wixstatic.com/media/651430_f3db8a45b3dd46bc9861746e466024c0~mv2.webp",
+      "is_service": true,
+      "service_details": {
+        "summary": "Com a expertise da Trust Tools na fabricação e no desenvolvimento de ferramentas diamantadas, oferecemos o serviço de repastilhamento de serras, coroas, cálices e fresas.",
+        "savings": "Até 40% de economia",
+        "compliance": "Todos os processos seguem as normas de segurança vigentes (NR12)",
+        "applicable_tools": ["Serras", "Coroas", "Cálices", "Fresas"]
+      },
+      "products": []
+    }
+  ],
+  "catalogs": [
+    {
+      "title": "Ferramentas Importadas",
+      "category_slug": null,
+      "pdf_url": "https://www.trusttools.com.br/_files/ugd/651430_ee4fee6e428042418d461d2f272cbdf2.pdf",
+      "description": "Catálogo de ferramentas importadas pela Trust Tools"
+    },
+    {
+      "title": "Catálogo Geral de Produtos",
+      "category_slug": "construcao",
+      "pdf_url": "https://www.trusttools.com.br/_files/ugd/651430_02be861619b2420799a3eb7013367562.pdf",
+      "description": "Catálogo de produtos - referenciado nas páginas de Construção e Refratários"
+    },
+    {
+      "title": "Catálogo Pedras",
+      "category_slug": "pedras",
+      "pdf_url": "https://www.trusttools.com.br/_files/ugd/651430_4311144dcefc493ea797aca90216f806.pdf",
+      "description": "Catálogo da linha de Pedras"
+    }
+  ],
+  "scraping_notes": {
+    "pages_scraped": [
+      "https://www.trusttools.com.br/",
+      "https://www.trusttools.com.br/sobre-nós",
+      "https://www.trusttools.com.br/about-3",
+      "https://www.trusttools.com.br/cópia-trust-tools",
+      "https://www.trusttools.com.br/cópia-construção",
+      "https://www.trusttools.com.br/cópia-construção-1",
+      "https://www.trusttools.com.br/cópia-pedras",
+      "https://www.trusttools.com.br/cópia-segmentos",
+      "https://www.trusttools.com.br/repastilhamento",
+      "https://www.trusttools.com.br/catalogos",
+      "https://www.trusttools.com.br/contato"
+    ],
+    "pages_failed": [
+      "https://www.trusttools.com.br/catálogos (404 — correct URL is /catalogos without accent)"
+    ],
+    "limitations": [
+      "Wix site does not expose individual product detail pages — products are listed only on category pages",
+      "Most product images on category pages are rendered dynamically and not extractable as direct URLs via static HTML scraping",
+      "Catálogos page only exposed one direct PDF link in HTML; additional category PDFs were referenced inside category pages",
+      "Repastilhamento is a service offering, not a product category — has no products array"
+    ]
+  }
+}
