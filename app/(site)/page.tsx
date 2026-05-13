@@ -37,9 +37,9 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-[116px] pb-20" style={{ background: "linear-gradient(180deg, #F4F7FB 0%, #EAF1FF 100%)" }}>
-        {/* Vídeo de fundo YouTube (autoplay, muted, 8% opacidade) */}
+      {/* HERO — dark theme com vídeo de fundo */}
+      <section className="hero-dark relative overflow-hidden pt-[116px] pb-20" style={{ background: "linear-gradient(180deg, #061E4D 0%, #04122F 100%)" }}>
+        {/* Vídeo de fundo YouTube (autoplay, muted, 8% opacidade sobre dark mask) */}
         <div
           aria-hidden
           style={{
@@ -70,6 +70,16 @@ export default async function HomePage() {
             }}
           />
         </div>
+
+        {/* Glow no centro pra dar profundidade */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 50% 30%, rgba(30,99,233,.25), transparent 70%), radial-gradient(40% 30% at 80% 70%, rgba(0,209,255,.18), transparent 70%)",
+          }}
+        />
         <div className="hero-orb" style={{ width: 420, height: 420, background: "rgba(30,99,233,.18)", right: -80, top: -80, "--orb-dur": "13s" } as React.CSSProperties} />
         <div className="hero-orb" style={{ width: 280, height: 280, background: "rgba(0,209,255,.14)", left: "4%", bottom: "10%", "--orb-dur": "9s", "--orb-delay": "-4s" } as React.CSSProperties} />
         <div className="hero-orb" style={{ width: 180, height: 180, background: "rgba(90,169,255,.12)", left: "38%", top: "22%", "--orb-dur": "16s", "--orb-delay": "-7s" } as React.CSSProperties} />
@@ -93,30 +103,30 @@ export default async function HomePage() {
             </Reveal>
           </div>
 
-          <Reveal className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 p-7 backdrop-blur-xl bg-white/70 border border-line rounded-[28px] shadow-md">
-            <div className="text-center p-2">
+          <Reveal className="hero-stats mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 p-7 border rounded-[28px]">
+            <div className="hero-stat text-center p-2">
               <div className="font-display font-bold leading-none grad-text" style={{ fontSize: "clamp(1.5rem, 2.2vw + .8rem, 2.4rem)", letterSpacing: "-.02em" }}>
                 <Counter target={12} prefix="+" suffix=" anos" />
               </div>
-              <div className="text-[13px] text-ink-3 mt-2">abastecendo a indústria brasileira</div>
+              <div className="lbl text-[13px] mt-2">abastecendo a indústria brasileira</div>
             </div>
-            <div className="text-center p-2">
+            <div className="hero-stat text-center p-2">
               <div className="font-display font-bold leading-none grad-text" style={{ fontSize: "clamp(1.5rem, 2.2vw + .8rem, 2.4rem)", letterSpacing: "-.02em" }}>
                 <Counter target={5000} prefix="+" />
               </div>
-              <div className="text-[13px] text-ink-3 mt-2">SKUs em estoque pronto</div>
+              <div className="lbl text-[13px] mt-2">SKUs em estoque pronto</div>
             </div>
-            <div className="text-center p-2">
+            <div className="hero-stat text-center p-2">
               <div className="font-display font-bold leading-none grad-text" style={{ fontSize: "clamp(1.5rem, 2.2vw + .8rem, 2.4rem)", letterSpacing: "-.02em" }}>
                 <Counter target={2} suffix=" CDs" />
               </div>
-              <div className="text-[13px] text-ink-3 mt-2">centros de distribuição em SP</div>
+              <div className="lbl text-[13px] mt-2">centros de distribuição em SP</div>
             </div>
-            <div className="text-center p-2">
+            <div className="hero-stat text-center p-2">
               <div className="font-display font-bold leading-none grad-text" style={{ fontSize: "clamp(1.5rem, 2.2vw + .8rem, 2.4rem)", letterSpacing: "-.02em" }}>
                 <Counter target={48} suffix="h" />
               </div>
-              <div className="text-[13px] text-ink-3 mt-2">entrega média no Sudeste</div>
+              <div className="lbl text-[13px] mt-2">entrega média no Sudeste</div>
             </div>
           </Reveal>
         </div>

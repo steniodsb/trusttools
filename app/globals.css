@@ -274,6 +274,55 @@ h1, h2, h3, h4, h5 {
   pointer-events: none;
 }
 
+/* Hero dark theme — vídeo de fundo + máscara azul escura */
+.hero-dark .eyebrow {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.hero-dark .eyebrow::before {
+  box-shadow: 0 0 12px var(--color-accent);
+}
+.hero-dark .h-display,
+.hero-dark h1 {
+  color: #ffffff;
+}
+.hero-dark .text-lead {
+  color: rgba(255, 255, 255, 0.78);
+}
+.hero-dark .btn-ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.hero-dark .btn-ghost:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+.hero-dark .hero-stats {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.hero-dark .hero-stat .lbl {
+  color: rgba(255, 255, 255, 0.65);
+}
+.hero-dark .grad-text {
+  background: linear-gradient(135deg, #5aa9ff 0%, #00d1ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 /* YouTube background video do hero */
 .yt-hero-bg {
   position: absolute;
