@@ -39,6 +39,37 @@ export default async function HomePage() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden pt-[116px] pb-20" style={{ background: "linear-gradient(180deg, #F4F7FB 0%, #EAF1FF 100%)" }}>
+        {/* Vídeo de fundo YouTube (autoplay, muted, 8% opacidade) */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            overflow: "hidden",
+            pointerEvents: "none",
+            opacity: 0.08,
+            zIndex: 0,
+          }}
+        >
+          <iframe
+            src="https://www.youtube.com/embed/3H8u5AZVKME?autoplay=1&mute=1&loop=1&playlist=3H8u5AZVKME&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3"
+            title="Trust Tools — vídeo de fundo"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            frameBorder={0}
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "max(100%, 177.78vh)",
+              height: "max(100%, 56.25vw)",
+              minWidth: "100%",
+              minHeight: "100%",
+              border: 0,
+              pointerEvents: "none",
+            }}
+          />
+        </div>
         <div className="hero-orb" style={{ width: 420, height: 420, background: "rgba(30,99,233,.18)", right: -80, top: -80, "--orb-dur": "13s" } as React.CSSProperties} />
         <div className="hero-orb" style={{ width: 280, height: 280, background: "rgba(0,209,255,.14)", left: "4%", bottom: "10%", "--orb-dur": "9s", "--orb-delay": "-4s" } as React.CSSProperties} />
         <div className="hero-orb" style={{ width: 180, height: 180, background: "rgba(90,169,255,.12)", left: "38%", top: "22%", "--orb-dur": "16s", "--orb-delay": "-7s" } as React.CSSProperties} />

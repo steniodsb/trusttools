@@ -274,6 +274,26 @@ h1, h2, h3, h4, h5 {
   pointer-events: none;
 }
 
+/* YouTube background video do hero */
+.yt-hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.08;
+  z-index: 0;
+}
+.yt-hero-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100%, 177.78vh);
+  height: max(100%, 56.25vw);
+  border: 0;
+  pointer-events: none;
+}
+
 /* Hero orbs */
 .hero-orb {
   position: absolute;
