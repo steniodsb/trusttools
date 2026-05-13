@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, MessageCircle } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/server";
 import { whatsappUrl, siteConfig } from "@/lib/utils";
 import { ProductGallery } from "@/components/site/product-gallery";
 import { Reveal } from "@/components/site/reveal";
 import type { Category, Product, ProductImage } from "@/lib/database.types";
 
-export const revalidate = 300;
+// Pure dynamic — no SSG, no cookies dependency
+export const dynamic = "force-dynamic";
 
 type Params = Promise<{ slug: string }>;
 
@@ -17,16 +18,28 @@ type FullProduct = Product & {
   images: ProductImage[];
 };
 
+/** Fetch product. Uses admin client (service_role) to avoid any RLS or cookie issues. */
 async function getProduct(slug: string): Promise<FullProduct | null> {
   try {
-    const supabase = await createClient();
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!url || !key) {
+      console.error("[produto/slug] env vars Supabase faltando");
+      return null;
+    }
+
+    const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("products")
       .select(`*, category:categories(*), images:product_images(*)`)
       .eq("slug", slug)
       .eq("active", true)
       .maybeSingle();
-    if (error) console.error("[produto/slug] query error:", error);
+
+    if (error) {
+      console.error("[produto/slug] query error:", error);
+      return null;
+    }
     if (!data) return null;
 
     const images: ProductImage[] = Array.isArray(data.images)
@@ -44,7 +57,7 @@ async function getProduct(slug: string): Promise<FullProduct | null> {
       images,
     } as FullProduct;
   } catch (err) {
-    console.error("[produto/slug] erro:", err);
+    console.error("[produto/slug] erro fatal:", err);
     return null;
   }
 }
@@ -54,38 +67,30 @@ export async function generateMetadata({
 }: {
   params: Params;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const product = await getProduct(slug);
-  if (!product) return { title: "Produto não encontrado" };
+  try {
+    const { slug } = await params;
+    const product = await getProduct(slug);
+    if (!product) return { title: "Produto não encontrado" };
 
-  const desc =
-    product.short_description ||
-    product.long_description?.slice(0, 160) ||
-    siteConfig.description;
-  const primary = product.images.find((i) => i.is_primary) ?? product.images[0];
+    const desc =
+      product.short_description ||
+      product.long_description?.slice(0, 160) ||
+      siteConfig.description;
+    const primary = product.images[0];
 
-  return {
-    title: product.name,
-    description: desc,
-    openGraph: {
+    return {
       title: product.name,
       description: desc,
-      type: "website",
-      images: primary ? [{ url: primary.url, alt: primary.alt || product.name }] : [],
-    },
-  };
-}
-
-export async function generateStaticParams() {
-  try {
-    const supabase = await createClient();
-    const { data } = await supabase
-      .from("products")
-      .select("slug")
-      .eq("active", true);
-    return (data || []).map((p) => ({ slug: p.slug }));
-  } catch {
-    return [];
+      openGraph: {
+        title: product.name,
+        description: desc,
+        type: "website",
+        images: primary?.url ? [{ url: primary.url }] : [],
+      },
+    };
+  } catch (err) {
+    console.error("[produto/slug] metadata erro:", err);
+    return { title: "Produto" };
   }
 }
 
@@ -95,8 +100,11 @@ export default async function ProductPage({ params }: { params: Params }) {
   if (!product) notFound();
 
   const waMsg = `Olá! Tenho interesse no produto "${product.name}". Pode me passar mais informações?`;
-  const applications: string[] = Array.isArray(product.applications) ? product.applications : [];
-  const specsRaw = product.specs && typeof product.specs === "object" ? product.specs : {};
+  const applications: string[] = Array.isArray(product.applications)
+    ? product.applications
+    : [];
+  const specsRaw =
+    product.specs && typeof product.specs === "object" ? product.specs : {};
   const specsEntries = Object.entries(specsRaw).map(([k, v]) => {
     const display =
       v == null
@@ -110,9 +118,15 @@ export default async function ProductPage({ params }: { params: Params }) {
   return (
     <>
       {/* Breadcrumb + sub header */}
-      <div className="pt-[100px] pb-6 bg-bg" style={{ background: "linear-gradient(180deg, #F4F7FB 0%, #EAF1FF 100%)" }}>
+      <div
+        className="pt-[100px] pb-6"
+        style={{ background: "linear-gradient(180deg, #F4F7FB 0%, #EAF1FF 100%)" }}
+      >
         <div className="tt-container">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-ink-3 mb-2">
+          <nav
+            aria-label="Breadcrumb"
+            className="flex items-center gap-2 text-sm text-ink-3 mb-2 flex-wrap"
+          >
             <Link href="/" className="hover:text-brand-700">Home</Link>
             <ChevronRight className="h-3 w-3" />
             <Link href="/produtos" className="hover:text-brand-700">Produtos</Link>
@@ -128,7 +142,9 @@ export default async function ProductPage({ params }: { params: Params }) {
               </>
             )}
             <ChevronRight className="h-3 w-3" />
-            <span className="text-ink-2 truncate max-w-[200px]">{product.name}</span>
+            <span className="text-ink-2 truncate max-w-[200px]">
+              {product.name}
+            </span>
           </nav>
         </div>
       </div>
@@ -151,7 +167,8 @@ export default async function ProductPage({ params }: { params: Params }) {
               {product.brand && (
                 <div className="mb-5">
                   <span className="text-sm font-semibold text-ink-3 uppercase tracking-wider">
-                    Marca: <span className="text-ink-2">{product.brand}</span>
+                    Marca:{" "}
+                    <span className="text-ink-2">{product.brand}</span>
                   </span>
                 </div>
               )}
@@ -180,7 +197,10 @@ export default async function ProductPage({ params }: { params: Params }) {
                   <h3 className="text-base mb-3">Aplicações</h3>
                   <ul className="grid gap-2.5">
                     {applications.map((app, i) => (
-                      <li key={i} className="flex gap-3 items-start text-sm text-ink-2">
+                      <li
+                        key={i}
+                        className="flex gap-3 items-start text-sm text-ink-2"
+                      >
                         <span
                           className="flex-shrink-0 mt-1 h-4 w-4 rounded-full"
                           style={{ background: "var(--grad-primary)" }}
@@ -218,38 +238,13 @@ export default async function ProductPage({ params }: { params: Params }) {
               <h2 className="h-section mb-6 text-[clamp(1.5rem,2vw+.6rem,2rem)]">
                 Sobre o produto
               </h2>
-              <div className="prose prose-tt max-w-none text-ink-2 whitespace-pre-line leading-relaxed">
+              <div className="text-ink-2 whitespace-pre-line leading-relaxed">
                 {product.long_description}
               </div>
             </Reveal>
           )}
         </div>
       </section>
-
-      {/* JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            name: product.name,
-            description: product.short_description || product.long_description,
-            image: product.images.map((i) => i.url),
-            brand: product.brand ? { "@type": "Brand", name: product.brand } : undefined,
-            category: product.category?.name,
-            offers: {
-              "@type": "Offer",
-              availability: "https://schema.org/InStock",
-              priceCurrency: "BRL",
-              seller: {
-                "@type": "Organization",
-                name: siteConfig.name,
-              },
-            },
-          }),
-        }}
-      />
     </>
   );
 }
