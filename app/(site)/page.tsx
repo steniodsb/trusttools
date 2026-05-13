@@ -46,7 +46,7 @@ export default async function HomePage() {
 
         <div className="tt-container relative z-10">
           <div className="grid gap-6 text-center items-center">
-            <Reveal as="span" className="eyebrow self-center">IMPORTAÇÃO • DISTRIBUIÇÃO • SUPORTE TÉCNICO</Reveal>
+            <Reveal as="span" className="eyebrow place-self-center">IMPORTAÇÃO • DISTRIBUIÇÃO • SUPORTE TÉCNICO</Reveal>
             <Reveal as="h1" className="h-display my-2">
               A ferramenta certa, no <span className="grad-text">dia certo</span>,<br />
               com quem entende do seu setor.
