@@ -38,8 +38,8 @@ export default async function HomePage() {
   return (
     <>
       {/* HERO — dark theme com vídeo de fundo */}
-      <section className="hero-dark relative overflow-hidden pt-[116px] pb-20" style={{ background: "linear-gradient(180deg, #061E4D 0%, #04122F 100%)" }}>
-        {/* Vídeo de fundo YouTube (autoplay, muted, 8% opacidade sobre dark mask) */}
+      <section className="hero-dark relative overflow-hidden pt-[116px] pb-20" style={{ background: "linear-gradient(180deg, #0a0e1a 0%, #03060d 100%)" }}>
+        {/* Vídeo de fundo YouTube (autoplay, muted, 15% opacidade sobre dark mask) */}
         <div
           aria-hidden
           style={{
@@ -47,7 +47,7 @@ export default async function HomePage() {
             inset: 0,
             overflow: "hidden",
             pointerEvents: "none",
-            opacity: 0.08,
+            opacity: 0.15,
             zIndex: 0,
           }}
         >
