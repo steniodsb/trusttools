@@ -62,18 +62,22 @@ function slugify(str) {
     .replace(/-+/g, "-");
 }
 
-// Mapa de category_slug interno para nomes humanos (mesmos que o seed padrão)
+// Mapeia slug do scrape → slug canônico do banco (do setup.mjs)
+const SLUG_MAP = {
+  "construcao": "construcao-civil",
+  "refratarios": "refratarios",
+  "pedras": "pedras-marmore",
+  "segmentos": "segmentos-diamantados",
+  "ferramentas-diversas": "ferramentaria-geral",
+  "repastilhamento": "recapagem",
+};
+
 const CATEGORY_NAME_MAP = {
-  "construcao": "Construção Civil",
   "construcao-civil": "Construção Civil",
   "refratarios": "Refratários",
-  "pedras": "Pedras & Mármore",
   "pedras-marmore": "Pedras & Mármore",
-  "segmentos": "Segmentos Diamantados",
   "segmentos-diamantados": "Segmentos Diamantados",
-  "ferramentas-diversas": "Ferramentaria Geral",
   "ferramentaria-geral": "Ferramentaria Geral",
-  "repastilhamento": "Recapagem & Serviços",
   "recapagem": "Recapagem & Serviços",
 };
 
@@ -110,7 +114,7 @@ async function downloadAndUploadImage(externalUrl, productId, isPrimary = false)
 }
 
 async function upsertCategory(cat) {
-  const slug = cat.slug;
+  const slug = SLUG_MAP[cat.slug] || cat.slug;
   const name = CATEGORY_NAME_MAP[slug] || cat.name;
   // Tenta achar existente
   const existing = await supabaseFetch(
@@ -217,7 +221,8 @@ async function main() {
     const id = await upsertCategory(cat);
     if (id) {
       categoryMap.set(cat.slug, id);
-      console.log(`  ✓ ${CATEGORY_NAME_MAP[cat.slug] || cat.name}`);
+      const canonicalSlug = SLUG_MAP[cat.slug] || cat.slug;
+      console.log(`  ✓ ${CATEGORY_NAME_MAP[canonicalSlug] || cat.name}`);
     }
   }
 
