@@ -52,3 +52,10 @@ export const siteConfig = {
     linkedin: "https://br.linkedin.com/company/trust-tools-importacao-e-exportacao-ltda",
   },
 };
+
+// Fotos reais da fábrica no Supabase Storage
+const STORAGE_BASE =
+  "https://eivnmxrsyavilmslvwix.supabase.co/storage/v1/object/public/product-images/factory";
+
+export const factoryPhoto = (n: number) =>
+  `${STORAGE_BASE}/factory-${String(n).padStart(3, "0")}.jpeg`;

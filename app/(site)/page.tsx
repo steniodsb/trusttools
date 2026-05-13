@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/site/reveal";
 import { Counter } from "@/components/site/counter";
 import { createClient } from "@/lib/supabase/server";
-import { siteConfig, whatsappUrl } from "@/lib/utils";
+import { siteConfig, whatsappUrl, factoryPhoto } from "@/lib/utils";
 import type { Category } from "@/lib/database.types";
 
 export const revalidate = 300;
@@ -58,7 +58,7 @@ export default async function HomePage() {
               <a href={whatsappUrl("Olá! Quero falar com um especialista.")} target="_blank" rel="noopener" className="btn btn-primary btn-lg">
                 Falar com um especialista <span className="arrow">→</span>
               </a>
-              <Link href="/catalogos" className="btn btn-ghost btn-lg">Ver catálogo completo</Link>
+              <Link href="/produtos" className="btn btn-ghost btn-lg">Ver catálogo completo</Link>
             </Reveal>
           </div>
 
@@ -91,18 +91,19 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* PHOTO STRIP */}
+      {/* PHOTO STRIP — fotos reais da fábrica */}
       <section className="tt-section py-0">
         <div className="tt-container">
           <Reveal className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-16">
-            {[
-              "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
-              "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80",
-              "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=600&q=80",
-              "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=600&q=80",
-            ].map((src, i) => (
-              <div key={i} className="photo-strip-item relative aspect-[3/4] overflow-hidden rounded-[14px]">
-                <Image src={src} alt={`Imagem industrial ${i + 1}`} fill className="object-cover" unoptimized />
+            {[3, 5, 8, 16].map((n, i) => (
+              <div key={n} className="photo-strip-item relative aspect-[3/4] overflow-hidden rounded-[14px]">
+                <Image
+                  src={factoryPhoto(n)}
+                  alt={`Fábrica Trust Tools - foto ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 25vw, 50vw"
+                />
                 <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(6,30,77,.45) 100%)" }} />
               </div>
             ))}
@@ -143,8 +144,80 @@ export default async function HomePage() {
             </Reveal>
 
             <Reveal className="relative aspect-[4/3] rounded-[28px] overflow-hidden border border-line shadow-lg">
-              <Image src="/hero-home.jpg" alt="Centro de distribuição Trust Tools" fill className="object-cover" />
+              <Image
+                src={factoryPhoto(2)}
+                alt="Fábrica Trust Tools em Jundiaí"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
               <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(6,30,77,.45) 100%), linear-gradient(135deg, rgba(10,58,140,.18) 0%, transparent 60%)" }} />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ESPECIALIDADE: LAJES ALVEOLARES PROTENDIDAS */}
+      <section className="tt-section pt-0">
+        <div className="tt-container">
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
+            <Reveal className="relative aspect-[4/3] lg:aspect-[5/6] rounded-[28px] overflow-hidden border border-line shadow-lg order-2 lg:order-1">
+              <Image
+                src={factoryPhoto(7)}
+                alt="Disco diamantado de grande porte para corte de lajes alveolares protendidas"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 55vw, 100vw"
+              />
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 40%, rgba(6,30,77,.55) 100%)" }} />
+              <div className="absolute bottom-6 left-6 right-6 z-10">
+                <span className="inline-block px-3 py-1.5 rounded-full bg-accent/95 text-brand-900 text-xs font-bold tracking-wider uppercase">
+                  Especialidade Trust Tools
+                </span>
+              </div>
+            </Reveal>
+
+            <Reveal className="order-1 lg:order-2">
+              <span className="eyebrow">CORTE PESADO</span>
+              <h2 className="h-section mt-4">
+                <span className="grad-text">Lajes alveolares protendidas</span> — onde a Trust Tools é referência.
+              </h2>
+              <p className="text-lead mt-5">
+                Discos diamantados de grande diâmetro (<strong className="text-ink">600mm a 1200mm</strong>) projetados pra cortar lajes alveolares protendidas, vigas e pilares de concreto pré-fabricado com precisão e durabilidade.
+              </p>
+
+              <div className="mt-7 grid gap-4">
+                <div className="flex gap-4 items-start">
+                  <span className="flex-shrink-0 grid h-11 w-11 place-items-center rounded-xl text-white font-display font-bold" style={{ background: "var(--grad-primary)" }}>1</span>
+                  <div>
+                    <h3 className="text-base text-ink mb-1">Linha completa TR-760</h3>
+                    <p className="text-sm text-ink-2 m-0">Disco de corte Ø600 a 1200mm para concreto curado, alta durabilidade e baixo custo por metro cortado.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-start">
+                  <span className="flex-shrink-0 grid h-11 w-11 place-items-center rounded-xl text-white font-display font-bold" style={{ background: "var(--grad-primary)" }}>2</span>
+                  <div>
+                    <h3 className="text-base text-ink mb-1">Recapagem de segmentos</h3>
+                    <p className="text-sm text-ink-2 m-0">Devolve a vida útil do disco com até <strong className="text-ink">40% de economia</strong> versus comprar novo. Lead-time curto, devolução do mesmo casco.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-start">
+                  <span className="flex-shrink-0 grid h-11 w-11 place-items-center rounded-xl text-white font-display font-bold" style={{ background: "var(--grad-primary)" }}>3</span>
+                  <div>
+                    <h3 className="text-base text-ink mb-1">Atendimento técnico de fábrica</h3>
+                    <p className="text-sm text-ink-2 m-0">Recomendação por tipo de concreto, máquina e produtividade desejada — direto de quem fabrica.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/produtos?categoria=lajes-alveolares-protendidas" className="btn btn-primary">
+                  Ver linha completa <span className="arrow">→</span>
+                </Link>
+                <a href={whatsappUrl("Olá! Tenho interesse em discos pra lajes alveolares protendidas.")} target="_blank" rel="noopener" className="btn btn-ghost">
+                  Falar com especialista
+                </a>
+              </div>
             </Reveal>
           </div>
         </div>

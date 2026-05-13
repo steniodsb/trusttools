@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/site/reveal";
 import { SubHero } from "@/components/site/sub-hero";
-import { whatsappUrl } from "@/lib/utils";
+import { whatsappUrl, factoryPhoto } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Sobre",
@@ -95,10 +95,11 @@ export default function SobrePage() {
 
             <Reveal className="relative aspect-[4/3] rounded-[28px] overflow-hidden border border-line shadow-lg">
               <Image
-                src="/hero-sobre.jpg"
-                alt="Time técnico Trust Tools"
+                src={factoryPhoto(2)}
+                alt="Fábrica Trust Tools em Jundiaí"
                 fill
                 className="object-cover"
+                sizes="(min-width: 1024px) 50vw, 100vw"
               />
               <div
                 className="absolute inset-0 pointer-events-none"
