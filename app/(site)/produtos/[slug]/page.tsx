@@ -20,21 +20,31 @@ type FullProduct = Product & {
 async function getProduct(slug: string): Promise<FullProduct | null> {
   try {
     const supabase = await createClient();
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("products")
       .select(`*, category:categories(*), images:product_images(*)`)
       .eq("slug", slug)
       .eq("active", true)
       .maybeSingle();
+    if (error) console.error("[produto/slug] query error:", error);
     if (!data) return null;
+
+    const images: ProductImage[] = Array.isArray(data.images)
+      ? [...data.images].sort(
+          (a, b) =>
+            Number(b.is_primary) - Number(a.is_primary) ||
+            (a.display_order ?? 0) - (b.display_order ?? 0),
+        )
+      : [];
+
     return {
       ...data,
-      images: (data.images || []).sort(
-        (a: ProductImage, b: ProductImage) =>
-          Number(b.is_primary) - Number(a.is_primary) || a.display_order - b.display_order,
-      ),
+      applications: Array.isArray(data.applications) ? data.applications : [],
+      specs: data.specs && typeof data.specs === "object" ? data.specs : {},
+      images,
     } as FullProduct;
-  } catch {
+  } catch (err) {
+    console.error("[produto/slug] erro:", err);
     return null;
   }
 }
@@ -85,7 +95,17 @@ export default async function ProductPage({ params }: { params: Params }) {
   if (!product) notFound();
 
   const waMsg = `Olá! Tenho interesse no produto "${product.name}". Pode me passar mais informações?`;
-  const specsEntries = Object.entries(product.specs || {});
+  const applications: string[] = Array.isArray(product.applications) ? product.applications : [];
+  const specsRaw = product.specs && typeof product.specs === "object" ? product.specs : {};
+  const specsEntries = Object.entries(specsRaw).map(([k, v]) => {
+    const display =
+      v == null
+        ? "—"
+        : typeof v === "object"
+          ? JSON.stringify(v)
+          : String(v);
+    return [k, display] as const;
+  });
 
   return (
     <>
@@ -155,11 +175,11 @@ export default async function ProductPage({ params }: { params: Params }) {
                 </Link>
               </div>
 
-              {product.applications.length > 0 && (
+              {applications.length > 0 && (
                 <div className="mb-8">
                   <h3 className="text-base mb-3">Aplicações</h3>
                   <ul className="grid gap-2.5">
-                    {product.applications.map((app, i) => (
+                    {applications.map((app, i) => (
                       <li key={i} className="flex gap-3 items-start text-sm text-ink-2">
                         <span
                           className="flex-shrink-0 mt-1 h-4 w-4 rounded-full"
