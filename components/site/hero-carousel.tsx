@@ -61,7 +61,7 @@ export function HeroCarousel() {
 
   return (
     <section
-      className="relative overflow-hidden"
+      className="hero-dark relative overflow-hidden"
       style={{ minHeight: "calc(100svh - 76px)" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -84,30 +84,27 @@ export function HeroCarousel() {
         </div>
       ))}
 
-      {/* Dark overlay */}
+      {/* Dark overlay — camada base + gradiente para garantir contraste */}
+      <div
+        className="absolute inset-0 z-10"
+        style={{ background: "rgba(5,15,40,.55)" }}
+      />
       <div
         className="absolute inset-0 z-10"
         style={{
           background:
-            "linear-gradient(135deg, rgba(5,15,40,.88) 0%, rgba(5,15,40,.6) 60%, rgba(5,15,40,.35) 100%)",
+            "linear-gradient(105deg, rgba(5,15,40,.75) 0%, rgba(5,15,40,.35) 55%, transparent 100%)",
         }}
       />
 
       {/* Content */}
       <div className="tt-container relative z-20 flex flex-col justify-center min-h-[calc(100svh-76px)] py-24">
         <div className="max-w-3xl">
-          <span
-            className="eyebrow"
-            style={{ color: "rgba(255,255,255,.65)" }}
-          >
-            {slide.eyebrow}
-          </span>
-          <h1 className="h-display mt-4 mb-6 text-white">
+          <span className="eyebrow">{slide.eyebrow}</span>
+          <h1 className="h-display mt-4 mb-6">
             {renderTitle(slide.title, slide.highlight)}
           </h1>
-          <p className="text-lead mb-10" style={{ color: "rgba(255,255,255,.78)" }}>
-            {slide.description}
-          </p>
+          <p className="text-lead mb-10">{slide.description}</p>
           <div className="flex flex-wrap gap-4">
             <a
               href={whatsappUrl("Olá! Quero falar com um especialista.")}
