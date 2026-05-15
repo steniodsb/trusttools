@@ -42,3 +42,7 @@ yarn-error.log*
 next-env.d.ts
 __pycache__/
 generated-images/
+
+# Arquivos fonte (PDF e mídias originais — não vão para o repo)
+/CATALOGOS/
+/MIDIAS/

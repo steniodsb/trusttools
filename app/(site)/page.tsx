@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/site/reveal";
 import { Counter } from "@/components/site/counter";
+import { HeroCarousel } from "@/components/site/hero-carousel";
 import { createClient } from "@/lib/supabase/server";
-import { siteConfig, whatsappUrl, factoryPhoto } from "@/lib/utils";
+import { siteConfig, whatsappUrl } from "@/lib/utils";
 import type { Category } from "@/lib/database.types";
 
 export const revalidate = 300;
@@ -21,14 +22,63 @@ async function getCategories(): Promise<Category[]> {
   }
 }
 
-// Fallback estático caso o banco ainda não tenha categorias
 const fallbackCategories = [
-  { slug: "construcao-civil", name: "Construção Civil", description: "Discos diamantados, brocas, serras, fixadores e ferramenta elétrica para construtoras que tocam obra pesada.", image_url: "/cat-construcao.jpg" },
-  { slug: "refratarios", name: "Refratários", description: "Brocas, fresas e abrasivos especiais para indústrias siderúrgicas, cimenteiras e cerâmicas.", image_url: "/cat-refratarios.jpg" },
-  { slug: "pedras-marmore", name: "Pedras & Mármore", description: "Discos, fresas, frankfurts, polidores e abrasivos para marmorarias e beneficiamento.", image_url: "/cat-pedras.jpg" },
-  { slug: "segmentos-diamantados", name: "Segmentos Diamantados", description: "Linha completa de segmentos para fios, serras e discos de grande porte.", image_url: "/cat-segmentos.jpg" },
-  { slug: "ferramentaria-geral", name: "Ferramentaria Geral", description: "EPIs, manuais, medição, fixação, abrasivos convencionais.", image_url: "/cat-diversos.jpg" },
-  { slug: "recapagem", name: "Recapagem & Serviços", description: "Recapagem de segmentos diamantados e reaproveitamento de ferramentas.", image_url: "/cat-recapagem.jpg" },
+  {
+    slug: "construcao-civil",
+    name: "Construção Civil",
+    description:
+      "Discos diamantados, brocas, serras, fixadores e ferramenta elétrica para construtoras que tocam obra pesada.",
+    image_url: "/cat-construcao.jpg",
+  },
+  {
+    slug: "refratarios",
+    name: "Refratários",
+    description:
+      "Brocas, fresas e abrasivos especiais para indústrias siderúrgicas, cimenteiras e cerâmicas.",
+    image_url: "/cat-refratarios.jpg",
+  },
+  {
+    slug: "pedras-marmore",
+    name: "Pedras & Mármore",
+    description:
+      "Discos, fresas, frankfurts, polidores e abrasivos para marmorarias e beneficiamento.",
+    image_url: "/cat-pedras.jpg",
+  },
+  {
+    slug: "segmentos-diamantados",
+    name: "Segmentos Diamantados",
+    description:
+      "Linha completa de segmentos para fios, serras e discos de grande porte.",
+    image_url: "/cat-segmentos.jpg",
+  },
+  {
+    slug: "ferramentaria-geral",
+    name: "Ferramentaria Geral",
+    description: "EPIs, manuais, medição, fixação, abrasivos convencionais.",
+    image_url: "/cat-diversos.jpg",
+  },
+  {
+    slug: "recapagem",
+    name: "Recapagem & Serviços",
+    description:
+      "Recapagem de segmentos diamantados e reaproveitamento de ferramentas.",
+    image_url: "/cat-recapagem.jpg",
+  },
+];
+
+const clientLogos = [
+  { src: "/logo-estivar.png", alt: "Estivar" },
+  { src: "/logo-gran.png", alt: "Gran Construções" },
+  { src: "/logo-bpm.png", alt: "BPM" },
+  { src: "/logo-leonardi.png", alt: "Leonardi" },
+  { src: "/logo-ta.png", alt: "TA" },
+];
+
+const stats = [
+  { target: 12, prefix: "+", suffix: " anos", label: "abastecendo a indústria" },
+  { target: 5000, prefix: "+", suffix: "", label: "SKUs em estoque pronto" },
+  { target: 2, prefix: "", suffix: " CDs", label: "centros de distribuição em SP" },
+  { target: 48, prefix: "", suffix: "h", label: "entrega média no Sudeste" },
 ];
 
 export default async function HomePage() {
@@ -37,291 +87,314 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* HERO — dark theme com vídeo de fundo */}
-      <section className="hero-dark relative overflow-hidden pt-[116px] pb-20" style={{ background: "linear-gradient(180deg, #0a0e1a 0%, #03060d 100%)" }}>
-        {/* Vídeo de fundo YouTube (autoplay, muted, 15% opacidade sobre dark mask) */}
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            overflow: "hidden",
-            pointerEvents: "none",
-            opacity: 0.15,
-            zIndex: 0,
-          }}
-        >
-          <iframe
-            src="https://www.youtube.com/embed/3H8u5AZVKME?autoplay=1&mute=1&loop=1&playlist=3H8u5AZVKME&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3"
-            title="Trust Tools — vídeo de fundo"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            frameBorder={0}
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "max(100%, 177.78vh)",
-              height: "max(100%, 56.25vw)",
-              minWidth: "100%",
-              minHeight: "100%",
-              border: 0,
-              pointerEvents: "none",
-            }}
-          />
-        </div>
+      {/* 1. HERO CARROSSEL */}
+      <HeroCarousel />
 
-        {/* Glow no centro pra dar profundidade */}
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(60% 50% at 50% 30%, rgba(30,99,233,.25), transparent 70%), radial-gradient(40% 30% at 80% 70%, rgba(0,209,255,.18), transparent 70%)",
-          }}
-        />
-        <div className="hero-orb" style={{ width: 420, height: 420, background: "rgba(30,99,233,.18)", right: -80, top: -80, "--orb-dur": "13s" } as React.CSSProperties} />
-        <div className="hero-orb" style={{ width: 280, height: 280, background: "rgba(0,209,255,.14)", left: "4%", bottom: "10%", "--orb-dur": "9s", "--orb-delay": "-4s" } as React.CSSProperties} />
-        <div className="hero-orb" style={{ width: 180, height: 180, background: "rgba(90,169,255,.12)", left: "38%", top: "22%", "--orb-dur": "16s", "--orb-delay": "-7s" } as React.CSSProperties} />
-        <div aria-hidden className="absolute inset-0 pointer-events-none" style={{ background: "var(--grad-aurora)" }} />
-
-        <div className="tt-container relative z-10">
-          <div className="grid gap-6 text-center items-center">
-            <Reveal as="span" className="eyebrow place-self-center">IMPORTAÇÃO • DISTRIBUIÇÃO • SUPORTE TÉCNICO</Reveal>
-            <Reveal as="h1" className="h-display my-2">
-              A ferramenta certa, no <span className="grad-text">dia certo</span>,<br />
-              com quem entende do seu setor.
-            </Reveal>
-            <Reveal as="p" className="text-lead mx-auto">
-              Há mais de uma década abastecendo construção, refratários, pedras e indústria pesada com produtos importados, estoque pronto em SP e atendimento técnico especializado.
-            </Reveal>
-            <Reveal className="flex flex-wrap gap-3.5 justify-center mt-8">
-              <a href={whatsappUrl("Olá! Quero falar com um especialista.")} target="_blank" rel="noopener" className="btn btn-primary btn-lg">
-                Falar com um especialista <span className="arrow">→</span>
-              </a>
-              <Link href="/produtos" className="btn btn-ghost btn-lg">Ver catálogo completo</Link>
-            </Reveal>
-          </div>
-
-          <Reveal className="hero-stats mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 p-7 border rounded-[28px]">
-            <div className="hero-stat text-center p-2">
-              <div className="font-display font-bold leading-none grad-text" style={{ fontSize: "clamp(1.5rem, 2.2vw + .8rem, 2.4rem)", letterSpacing: "-.02em" }}>
-                <Counter target={12} prefix="+" suffix=" anos" />
-              </div>
-              <div className="lbl text-[13px] mt-2">abastecendo a indústria brasileira</div>
-            </div>
-            <div className="hero-stat text-center p-2">
-              <div className="font-display font-bold leading-none grad-text" style={{ fontSize: "clamp(1.5rem, 2.2vw + .8rem, 2.4rem)", letterSpacing: "-.02em" }}>
-                <Counter target={5000} prefix="+" />
-              </div>
-              <div className="lbl text-[13px] mt-2">SKUs em estoque pronto</div>
-            </div>
-            <div className="hero-stat text-center p-2">
-              <div className="font-display font-bold leading-none grad-text" style={{ fontSize: "clamp(1.5rem, 2.2vw + .8rem, 2.4rem)", letterSpacing: "-.02em" }}>
-                <Counter target={2} suffix=" CDs" />
-              </div>
-              <div className="lbl text-[13px] mt-2">centros de distribuição em SP</div>
-            </div>
-            <div className="hero-stat text-center p-2">
-              <div className="font-display font-bold leading-none grad-text" style={{ fontSize: "clamp(1.5rem, 2.2vw + .8rem, 2.4rem)", letterSpacing: "-.02em" }}>
-                <Counter target={48} suffix="h" />
-              </div>
-              <div className="lbl text-[13px] mt-2">entrega média no Sudeste</div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* PHOTO STRIP — fotos reais da fábrica */}
-      <section className="tt-section py-0">
+      {/* 2. EMPRESAS QUE CONFIAM */}
+      <section className="py-12 bg-white border-b border-line">
         <div className="tt-container">
-          <Reveal className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-16">
-            {[3, 5, 8, 16].map((n, i) => (
-              <div key={n} className="photo-strip-item relative aspect-[3/4] overflow-hidden rounded-[14px]">
-                <Image
-                  src={factoryPhoto(n)}
-                  alt={`Fábrica Trust Tools - foto ${i + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 768px) 25vw, 50vw"
-                />
-                <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(6,30,77,.45) 100%)" }} />
+          <p className="text-center text-[11px] font-bold tracking-[.18em] uppercase text-ink-3 mb-8">
+            Empresas que confiam na Trust Tools
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
+            {clientLogos.map((logo) => (
+              <div
+                key={logo.alt}
+                className="relative h-10 w-28 grayscale opacity-55 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+              >
+                <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
               </div>
             ))}
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* SOBRE RESUMO */}
+      {/* 3. QUEM SOMOS */}
       <section className="tt-section">
         <div className="tt-container">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
             <Reveal>
               <span className="eyebrow">QUEM SOMOS</span>
-              <h2 className="h-section mt-4">A Trust Tools é o elo entre a <span className="grad-text">fábrica e o seu canteiro</span>.</h2>
-              <p className="text-lead">
-                Somos uma importadora e distribuidora de ferramentas industriais nascida pra resolver um problema simples: o Brasil precisa de produto importado de qualidade, disponível agora, com quem saiba indicar a aplicação correta.
+              <h2 className="h-section mt-4">
+                O elo entre a <span className="grad-text">fábrica e o seu canteiro</span>.
+              </h2>
+              <p className="text-lead mt-5">
+                Somos uma importadora e distribuidora de ferramentas industriais nascida para
+                resolver um problema simples: o Brasil precisa de produto importado de
+                qualidade, disponível agora, com quem saiba indicar a aplicação correta.
               </p>
-              <div className="mt-6 grid gap-3.5">
-                {[
-                  ["Importação direta", ", sem atravessador encarecendo o produto"],
-                  ["Estoque físico", " em Diadema e Jundiaí, com retirada no mesmo dia"],
-                  ["Equipe técnica", " que conhece a sua aplicação antes de vender"],
-                  ["Garantia formal", " e troca rápida em caso de defeito de fábrica"],
-                ].map(([strong, rest]) => (
-                  <div key={strong} className="flex gap-3.5 items-start">
-                    <span className="flex-shrink-0 grid h-7 w-7 place-items-center rounded-lg text-white shadow-[0_6px_14px_rgba(30,99,233,.35)]" style={{ background: "var(--grad-primary)" }}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    </span>
-                    <p className="m-0 text-ink-2"><strong className="text-ink">{strong}</strong>{rest}</p>
-                  </div>
-                ))}
-              </div>
+              <p className="text-ink-2 mt-4">
+                Atuamos com importação direta, estoque físico em Diadema e Jundiaí, equipe
+                técnica especializada e garantia formal em todos os produtos.
+              </p>
               <div className="mt-8">
-                <Link href="/sobre" className="btn-link">Conheça nossa história <span className="arrow">→</span></Link>
+                <Link href="/sobre" className="btn btn-primary btn-lg">
+                  Conheça nossa história <span className="arrow">→</span>
+                </Link>
               </div>
             </Reveal>
 
             <Reveal className="relative aspect-[4/3] rounded-[28px] overflow-hidden border border-line shadow-lg">
               <Image
-                src={factoryPhoto(2)}
-                alt="Fábrica Trust Tools em Jundiaí"
+                src="/hero-sobre.jpg"
+                alt="Trust Tools — equipe e instalações"
                 fill
                 className="object-cover"
                 sizes="(min-width: 1024px) 50vw, 100vw"
               />
-              <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(6,30,77,.45) 100%), linear-gradient(135deg, rgba(10,58,140,.18) 0%, transparent 60%)" }} />
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ESPECIALIDADE: LAJES ALVEOLARES PROTENDIDAS */}
-      <section className="tt-section pt-0">
-        <div className="tt-container">
-          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
-            <Reveal className="relative aspect-[4/3] lg:aspect-[5/6] rounded-[28px] overflow-hidden border border-line shadow-lg order-2 lg:order-1">
-              <Image
-                src={factoryPhoto(7)}
-                alt="Disco diamantado de grande porte para corte de lajes alveolares protendidas"
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 55vw, 100vw"
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent 50%, rgba(6,30,77,.4) 100%)",
+                }}
               />
-              <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 40%, rgba(6,30,77,.55) 100%)" }} />
-              <div className="absolute bottom-6 left-6 right-6 z-10">
-                <span className="inline-block px-3 py-1.5 rounded-full bg-accent/95 text-brand-900 text-xs font-bold tracking-wider uppercase">
-                  Especialidade Trust Tools
-                </span>
-              </div>
-            </Reveal>
-
-            <Reveal className="order-1 lg:order-2">
-              <span className="eyebrow">CORTE PESADO</span>
-              <h2 className="h-section mt-4">
-                <span className="grad-text">Lajes alveolares protendidas</span> — onde a Trust Tools é referência.
-              </h2>
-              <p className="text-lead mt-5">
-                Discos diamantados de grande diâmetro (<strong className="text-ink">600mm a 1200mm</strong>) projetados pra cortar lajes alveolares protendidas, vigas e pilares de concreto pré-fabricado com precisão e durabilidade.
-              </p>
-
-              <div className="mt-7 grid gap-4">
-                <div className="flex gap-4 items-start">
-                  <span className="flex-shrink-0 grid h-11 w-11 place-items-center rounded-xl text-white font-display font-bold" style={{ background: "var(--grad-primary)" }}>1</span>
-                  <div>
-                    <h3 className="text-base text-ink mb-1">Linha completa TR-760</h3>
-                    <p className="text-sm text-ink-2 m-0">Disco de corte Ø600 a 1200mm para concreto curado, alta durabilidade e baixo custo por metro cortado.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-start">
-                  <span className="flex-shrink-0 grid h-11 w-11 place-items-center rounded-xl text-white font-display font-bold" style={{ background: "var(--grad-primary)" }}>2</span>
-                  <div>
-                    <h3 className="text-base text-ink mb-1">Recapagem de segmentos</h3>
-                    <p className="text-sm text-ink-2 m-0">Devolve a vida útil do disco com até <strong className="text-ink">40% de economia</strong> versus comprar novo. Lead-time curto, devolução do mesmo casco.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-start">
-                  <span className="flex-shrink-0 grid h-11 w-11 place-items-center rounded-xl text-white font-display font-bold" style={{ background: "var(--grad-primary)" }}>3</span>
-                  <div>
-                    <h3 className="text-base text-ink mb-1">Atendimento técnico de fábrica</h3>
-                    <p className="text-sm text-ink-2 m-0">Recomendação por tipo de concreto, máquina e produtividade desejada — direto de quem fabrica.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/produtos?categoria=lajes-alveolares-protendidas" className="btn btn-primary">
-                  Ver linha completa <span className="arrow">→</span>
-                </Link>
-                <a href={whatsappUrl("Olá! Tenho interesse em discos pra lajes alveolares protendidas.")} target="_blank" rel="noopener" className="btn btn-ghost">
-                  Falar com especialista
-                </a>
-              </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* LINHAS DE PRODUTO */}
-      <section className="tt-section" id="produtos">
+      {/* 4. FAIXA DE NÚMEROS */}
+      <section
+        className="py-16 text-white"
+        style={{ background: "var(--grad-primary)" }}
+      >
         <div className="tt-container">
-          <Reveal className="section-head">
-            <span className="eyebrow">LINHAS DE PRODUTO</span>
-            <h2 className="h-section">Ferramentas industriais para quem <span className="grad-text">não pode parar</span>.</h2>
-            <p className="text-lead">Seis linhas que cobrem da escavação ao acabamento.</p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
-            {categories.slice(0, 6).map((cat) => (
-              <Reveal key={cat.slug}>
-                <Link href={`/produtos?categoria=${cat.slug}`} className="tt-card overflow-hidden flex flex-col h-full">
-                  <div className="relative aspect-[16/10]">
-                    {cat.image_url && (
-                      <Image src={cat.image_url} alt={cat.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                    )}
-                    <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(11,27,51,0) 40%, rgba(11,27,51,.35) 100%)" }} />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl mb-1.5">{cat.name}</h3>
-                    <p className="text-sm text-ink-2 mb-4 flex-1">{cat.description}</p>
-                    <span className="btn-link mt-auto">Ver produtos <span className="arrow">→</span></span>
-                  </div>
-                </Link>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {stats.map(({ target, prefix, suffix, label }) => (
+              <Reveal key={label} className="flex flex-col gap-2">
+                <div className="font-display font-bold text-white" style={{ fontSize: "clamp(2rem, 3vw + 1rem, 3.2rem)" }}>
+                  <Counter target={target} prefix={prefix} suffix={suffix} />
+                </div>
+                <div className="text-sm text-white/70">{label}</div>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA FINAL */}
+      {/* 5. CATEGORIAS */}
+      <section className="tt-section" id="categorias">
+        <div className="tt-container">
+          <Reveal className="section-head">
+            <span className="eyebrow">NOSSAS CATEGORIAS</span>
+            <h2 className="h-section">
+              Ferramentas para cada <span className="grad-text">segmento industrial</span>.
+            </h2>
+          </Reveal>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            {categories.slice(0, 6).map((cat) => (
+              <Reveal key={cat.slug}>
+                <Link
+                  href={`/categorias/${cat.slug}`}
+                  className="group block relative overflow-hidden rounded-[14px]"
+                  style={{ aspectRatio: "3/4" }}
+                >
+                  {cat.image_url && (
+                    <Image
+                      src={cat.image_url}
+                      alt={cat.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-106"
+                      sizes="(min-width: 1024px) 16vw, (min-width: 768px) 33vw, 50vw"
+                    />
+                  )}
+                  <div
+                    className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-80"
+                    style={{
+                      background:
+                        "linear-gradient(180deg, rgba(6,20,50,.08) 0%, rgba(6,20,50,.72) 100%)",
+                    }}
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-3">
+                    <span
+                      className="block px-2 py-1.5 text-[11px] font-bold tracking-[.08em] uppercase text-white text-center rounded-md"
+                      style={{ background: "rgba(10,58,140,.88)" }}
+                    >
+                      {cat.name}
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-10 text-center">
+            <Link href="/produtos" className="btn btn-ghost btn-lg">
+              Ver catálogo completo <span className="arrow">→</span>
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 6. CTA */}
       <section className="tt-section pt-0">
         <div className="tt-container">
           <Reveal
             className="relative overflow-hidden rounded-[28px] text-white text-center shadow-lg p-12 md:p-16"
             style={{ background: "var(--grad-primary)" }}
           >
-            <div aria-hidden className="absolute inset-0" style={{ background: "radial-gradient(circle at 20% 30%, rgba(255,255,255,.2), transparent 50%), radial-gradient(circle at 80% 70%, rgba(0,209,255,.4), transparent 50%)" }} />
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(circle at 20% 30%, rgba(255,255,255,.18), transparent 50%), radial-gradient(circle at 80% 70%, rgba(0,209,255,.38), transparent 50%)",
+              }}
+            />
             <div className="relative">
-              <h2 className="h-section text-white mb-4">Resolva seu fornecimento de ferramenta de uma vez por todas.</h2>
-              <p className="text-white/85 max-w-xl mx-auto mb-7">
+              <h2 className="h-section text-white mb-4">
+                Resolva seu fornecimento de ferramenta de uma vez por todas.
+              </h2>
+              <p className="text-white/85 max-w-xl mx-auto mb-8">
                 Cotação em até 4h úteis. Sem compromisso, sem cadastro chato.
               </p>
-              <a
-                href={whatsappUrl("Olá! Gostaria de fazer uma cotação.")}
-                target="_blank"
-                rel="noopener"
-                className="btn btn-lg"
-                style={{ background: "#fff", color: "var(--color-brand-700)" }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.5 3.5C18.3 1.2 15.3 0 12.1 0 5.5 0 .1 5.4.1 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.4-8.3zm-8.4 18.4c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-9.9 9.9-9.9 2.7 0 5.1 1 7 2.9s2.9 4.4 2.9 7c0 5.5-4.4 9.9-9.9 9.9z" />
-                </svg>
-                Falar com a Trust Tools no WhatsApp
-              </a>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <a
+                  href={whatsappUrl("Olá! Gostaria de fazer uma cotação.")}
+                  target="_blank"
+                  rel="noopener"
+                  className="btn btn-lg"
+                  style={{ background: "#fff", color: "var(--color-brand-700)" }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.5 3.5C18.3 1.2 15.3 0 12.1 0 5.5 0 .1 5.4.1 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.4-8.3zm-8.4 18.4c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-9.9 9.9-9.9 2.7 0 5.1 1 7 2.9s2.9 4.4 2.9 7c0 5.5-4.4 9.9-9.9 9.9z" />
+                  </svg>
+                  Falar no WhatsApp
+                </a>
+                <Link
+                  href="/produtos"
+                  className="btn btn-lg"
+                  style={{
+                    background: "rgba(255,255,255,.15)",
+                    color: "#fff",
+                    border: "1px solid rgba(255,255,255,.3)",
+                  }}
+                >
+                  Ver catálogo
+                </Link>
+              </div>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* 7. CONTATO RÁPIDO */}
+      <section className="tt-section" style={{ background: "var(--color-bg)" }}>
+        <div className="tt-container">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <Reveal>
+              <span className="eyebrow">CONTATO</span>
+              <h2 className="h-section mt-4">
+                Fale com quem <span className="grad-text">entende do assunto</span>.
+              </h2>
+              <p className="text-lead mt-4">
+                Nossa equipe técnica está disponível para indicar o produto certo para cada
+                aplicação. Sem enrolação, sem bot.
+              </p>
+
+              <div className="mt-8 grid gap-4">
+                <a
+                  href={whatsappUrl("Olá! Quero falar com um especialista.")}
+                  target="_blank"
+                  rel="noopener"
+                  className="flex items-center gap-4 group"
+                >
+                  <span
+                    className="flex-shrink-0 h-12 w-12 rounded-xl grid place-items-center text-white shadow-md"
+                    style={{ background: "#25D366" }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.5 3.5C18.3 1.2 15.3 0 12.1 0 5.5 0 .1 5.4.1 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.4-8.3zm-8.4 18.4c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-9.9 9.9-9.9 2.7 0 5.1 1 7 2.9s2.9 4.4 2.9 7c0 5.5-4.4 9.9-9.9 9.9z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <div className="text-xs text-ink-3 uppercase tracking-wider font-bold">WhatsApp</div>
+                    <div className="text-ink font-semibold group-hover:text-brand-500 transition-colors">
+                      {siteConfig.whatsappDisplay}
+                    </div>
+                  </div>
+                </a>
+
+                <a href={`tel:+551126682051`} className="flex items-center gap-4 group">
+                  <span
+                    className="flex-shrink-0 h-12 w-12 rounded-xl grid place-items-center text-white shadow-md"
+                    style={{ background: "var(--grad-primary)" }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68 2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 6.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <div className="text-xs text-ink-3 uppercase tracking-wider font-bold">Telefone</div>
+                    <div className="text-ink font-semibold group-hover:text-brand-500 transition-colors">
+                      {siteConfig.phone}
+                    </div>
+                  </div>
+                </a>
+
+                <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-4 group">
+                  <span
+                    className="flex-shrink-0 h-12 w-12 rounded-xl grid place-items-center text-white shadow-md"
+                    style={{ background: "var(--grad-primary)" }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </span>
+                  <div>
+                    <div className="text-xs text-ink-3 uppercase tracking-wider font-bold">E-mail</div>
+                    <div className="text-ink font-semibold group-hover:text-brand-500 transition-colors">
+                      {siteConfig.email}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </Reveal>
+
+            <Reveal className="flex flex-col gap-5">
+              <div className="tt-card p-8">
+                <h3 className="text-xl mb-1">Precisa de uma cotação?</h3>
+                <p className="text-ink-2 text-sm mb-6">
+                  Envie sua lista de produtos e receba retorno em até 4h úteis.
+                </p>
+                <div className="flex flex-col gap-3">
+                  <a
+                    href={whatsappUrl("Olá! Gostaria de fazer uma cotação.")}
+                    target="_blank"
+                    rel="noopener"
+                    className="btn btn-primary"
+                  >
+                    Cotação pelo WhatsApp
+                  </a>
+                  <Link href="/contato" className="btn btn-ghost">
+                    Formulário de contato
+                  </Link>
+                </div>
+              </div>
+
+              <div className="tt-card p-6">
+                <div className="flex items-start gap-4">
+                  <span
+                    className="flex-shrink-0 h-10 w-10 rounded-lg grid place-items-center text-white"
+                    style={{ background: "var(--grad-primary)" }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  </span>
+                  <div>
+                    <div className="font-semibold text-ink text-sm mb-0.5">Matriz — Diadema / SP</div>
+                    <div className="text-xs text-ink-3">R. Martins Fontes, 164 — Taboão</div>
+                    <div className="text-xs text-ink-3">CEP 09940-330</div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
     </>
