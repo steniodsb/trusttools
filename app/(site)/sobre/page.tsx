@@ -87,8 +87,8 @@ export default function SobrePage() {
             <Reveal className="lg:sticky lg:top-[100px]">
               <div className="relative aspect-[4/5] rounded-[28px] overflow-hidden border border-line shadow-lg">
                 <Image
-                  src="/trust-fachada.avif"
-                  alt="Fachada da Trust Tools"
+                  src="/trust-historia.jpg"
+                  alt="Interior da fábrica Trust Tools com máquinas e produtos"
                   fill
                   className="object-cover"
                   sizes="(min-width: 1024px) 45vw, 100vw"
