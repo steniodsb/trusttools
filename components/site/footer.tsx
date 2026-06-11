@@ -59,8 +59,9 @@ export function Footer() {
             <h4 className="text-white text-sm uppercase tracking-[.14em] font-semibold mb-4">Navegação</h4>
             <ul className="space-y-2 text-sm text-white/65">
               <li><Link href="/" className="hover:text-white">Home</Link></li>
-              <li><Link href="/sobre" className="hover:text-white">Sobre</Link></li>
+              <li><Link href="/sobre" className="hover:text-white">Trust Tools</Link></li>
               <li><Link href="/produtos" className="hover:text-white">Produtos</Link></li>
+              <li><Link href="/catalogos" className="hover:text-white">Catálogos</Link></li>
               <li><Link href="/contato" className="hover:text-white">Contato</Link></li>
             </ul>
           </div>

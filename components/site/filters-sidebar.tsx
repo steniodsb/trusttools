@@ -40,7 +40,7 @@ export function FiltersSidebar({ categories, diametros, origens, marcas }: Props
       else params.delete(k);
     }
     startTransition(() => {
-      router.push(`/produtos${params.toString() ? `?${params.toString()}` : ""}`);
+      router.push(`/catalogo${params.toString() ? `?${params.toString()}` : ""}`);
     });
   }
 
@@ -53,7 +53,7 @@ export function FiltersSidebar({ categories, diametros, origens, marcas }: Props
 
   function clearAll() {
     setQ("");
-    startTransition(() => router.push("/produtos"));
+    startTransition(() => router.push("/catalogo"));
   }
 
   const Inner = (

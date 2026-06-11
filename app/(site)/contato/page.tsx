@@ -47,13 +47,7 @@ export default function ContatoPage() {
     <>
       <SubHero
         eyebrow="FALE CONOSCO"
-        title={
-          <>
-            A gente responde rápido.
-            <br />
-            <span className="grad-text">De verdade</span>.
-          </>
-        }
+        title="Contato"
         description="Cotação em até 4h úteis. Pra urgência, WhatsApp resolve no mesmo minuto."
       />
 

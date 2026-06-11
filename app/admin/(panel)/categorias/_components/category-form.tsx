@@ -60,7 +60,7 @@ export function CategoryForm({ category }: { category?: Category }) {
       <div>
         <label className="block text-sm font-semibold text-ink mb-1.5">Slug (URL)</label>
         <input type="text" required value={slug} onChange={(e) => { setSlug(slugify(e.target.value)); setSlugTouched(true); }} disabled={pending} className={input} placeholder="construcao-civil" />
-        <p className="text-xs text-ink-3 mt-1">URL: /produtos?categoria={slug || "..."}</p>
+        <p className="text-xs text-ink-3 mt-1">URL: /catalogo?categoria={slug || "..."}</p>
       </div>
       <div>
         <label className="block text-sm font-semibold text-ink mb-1.5">Descrição</label>

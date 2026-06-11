@@ -129,12 +129,12 @@ export default async function ProductPage({ params }: { params: Params }) {
           >
             <Link href="/" className="hover:text-brand-700">Home</Link>
             <ChevronRight className="h-3 w-3" />
-            <Link href="/produtos" className="hover:text-brand-700">Produtos</Link>
+            <Link href="/catalogo" className="hover:text-brand-700">Catálogo</Link>
             {product.category && (
               <>
                 <ChevronRight className="h-3 w-3" />
                 <Link
-                  href={`/produtos?categoria=${product.category.slug}`}
+                  href={`/catalogo?categoria=${product.category.slug}`}
                   className="hover:text-brand-700"
                 >
                   {product.category.name}

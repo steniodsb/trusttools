@@ -22,7 +22,7 @@ export function SortSelect() {
     if (v === "relevance") next.delete("sort");
     else next.set("sort", v);
     startTransition(() => {
-      router.push(`/produtos${next.toString() ? `?${next.toString()}` : ""}`);
+      router.push(`/catalogo${next.toString() ? `?${next.toString()}` : ""}`);
     });
   }
 

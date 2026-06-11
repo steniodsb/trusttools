@@ -7,8 +7,9 @@ import { cn, whatsappUrl } from "@/lib/utils";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/sobre", label: "Sobre" },
+  { href: "/sobre", label: "Trust Tools" },
   { href: "/produtos", label: "Produtos" },
+  { href: "/catalogos", label: "Catálogos" },
   { href: "/contato", label: "Contato" },
 ];
 
