@@ -13,14 +13,6 @@ export const metadata: Metadata = {
     "A Trust Tools nasceu em 2021 para oferecer um modelo inovador em ferramentas, com matriz em Diadema-SP e filial em Jundiaí-SP especializada em ferramentas diamantadas.",
 };
 
-const valores: Array<[string, string]> = [
-  ["Qualidade", "Compromisso com produtos e serviços que superem as expectativas dos clientes."],
-  ["Inovação", "Busca constante por melhorias e novas tecnologias que agreguem valor ao mercado."],
-  ["Sustentabilidade", "Respeito ao meio ambiente em todas as etapas do nosso negócio."],
-  ["Ética", "Transparência e integridade em todas as relações."],
-  ["Foco no Cliente", "Priorizar as necessidades e o sucesso dos nossos clientes em tudo o que fazemos."],
-];
-
 const stats: Array<{ target: number; prefix?: string; suffix?: string; label: string }> = [
   { target: 12, prefix: "+", suffix: " anos", label: "abastecendo a indústria" },
   { target: 5000, prefix: "+", label: "SKUs em estoque pronto" },
@@ -88,42 +80,6 @@ export default function SobrePage() {
                   qualidade excepcionais. Na Trust Tools, estamos comprometidos em transformar
                   desafios em soluções de alta precisão.
                 </p>
-              </div>
-
-              {/* Missão / Visão / Valores */}
-              <div className="mt-8 grid gap-5">
-                <div className="tt-card p-6">
-                  <h3 className="text-lg mb-1.5">Missão</h3>
-                  <p className="text-sm text-ink-2 m-0">
-                    Prover soluções inovadoras e de alta qualidade em ferramentas para diversos
-                    segmentos, atendendo às necessidades do mercado com eficiência, confiabilidade e
-                    foco na satisfação dos nossos clientes.
-                  </p>
-                </div>
-                <div className="tt-card p-6">
-                  <h3 className="text-lg mb-1.5">Visão</h3>
-                  <p className="text-sm text-ink-2 m-0">
-                    Ser reconhecida como referência em ferramentas no Brasil, destacando-se pela
-                    inovação, excelência no atendimento e compromisso com o desenvolvimento
-                    sustentável dos setores que atendemos.
-                  </p>
-                </div>
-                <div className="tt-card p-6">
-                  <h3 className="text-lg mb-3">Valores</h3>
-                  <ul className="grid gap-2.5">
-                    {valores.map(([title, desc]) => (
-                      <li key={title} className="flex gap-3 items-start text-sm">
-                        <span
-                          className="flex-shrink-0 mt-1 h-3.5 w-3.5 rounded-full"
-                          style={{ background: "var(--grad-primary)" }}
-                        />
-                        <span className="text-ink-2">
-                          <strong className="text-ink">{title}:</strong> {desc}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
             </Reveal>
 

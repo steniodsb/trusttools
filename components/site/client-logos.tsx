@@ -11,7 +11,11 @@ import Image from "next/image";
 type Logo = { src: string; alt: string };
 
 const logos: Logo[] = [
-  // { src: "/clientes/cliente-1.png", alt: "Cliente 1" },
+  { src: "/clientes/estivar.avif", alt: "Estivar" },
+  { src: "/clientes/gran.avif", alt: "Gran" },
+  { src: "/clientes/bpm.avif", alt: "BPM" },
+  { src: "/clientes/leonardi.avif", alt: "Leonardi" },
+  { src: "/clientes/ta.avif", alt: "TA" },
 ];
 
 // Placeholders enquanto os logos reais não chegam
@@ -29,8 +33,10 @@ const placeholders = [
 export function ClientLogos() {
   const useImages = logos.length > 0;
   const items = useImages ? logos : placeholders;
-  // Duplicado para loop contínuo e sem emendas
-  const loop = [...items, ...items];
+  // Repete o conjunto para preencher a largura; duas metades iguais
+  // garantem o loop contínuo sem emendas (animação translateX(-50%)).
+  const half = [...items, ...items, ...items];
+  const loop = [...half, ...half];
 
   return (
     <section className="py-14 border-y border-line bg-white/60">

@@ -6,6 +6,8 @@ export type Linha = {
   slug: string;
   name: string;
   image: string;
+  /** Slug da categoria correspondente no banco (para listar os produtos) */
+  categorySlug: string;
   /** Descrição curta usada nos blocos da página /produtos */
   cardDescription: string;
   /** Subtítulo opcional exibido no topo da página individual */
@@ -26,6 +28,7 @@ export const linhas: Linha[] = [
     slug: "construcao",
     name: "Construção",
     image: "/cat-construcao.avif",
+    categorySlug: "construcao-civil",
     cardDescription:
       "Oferecemos uma linha completa de ferramentas para corte e retrabalho de concretos em geral, incluindo concreto protendido, pré-moldado, lajes alveolares, concreto curado e outros tipos de aplicações estruturais.",
     subtitle: "Ferramentas para Corte e Retrabalho de Concreto",
@@ -47,6 +50,7 @@ export const linhas: Linha[] = [
     slug: "refratarios",
     name: "Refratários",
     image: "/cat-refratarios.avif",
+    categorySlug: "refratarios",
     cardDescription:
       "Trabalhamos com ferramentas específicas para corte, furo e desbaste de materiais refratários e cerâmicas refratárias em geral, garantindo alto desempenho mesmo nas aplicações mais exigentes.",
     intro: [
@@ -68,6 +72,7 @@ export const linhas: Linha[] = [
     slug: "pedras",
     name: "Pedras",
     image: "/cat-pedras.avif",
+    categorySlug: "pedras-marmore",
     cardDescription:
       "Soluções completas em ferramentas para corte, furo, desbaste e acabamento em mármores, granitos e pedras preciosas, com alta durabilidade e precisão para os mais diversos tipos de aplicação.",
     intro: [
@@ -89,6 +94,7 @@ export const linhas: Linha[] = [
     slug: "segmentos",
     name: "Segmentos",
     image: "/cat-segmentos.avif",
+    categorySlug: "segmentos-diamantados",
     cardDescription:
       "Desenvolvemos e fornecemos segmentos diamantados de alta performance, compostos por diamante industrial, ligas metálicas, cobalto e tungstênio. São ideais para o corte e refino de diversos materiais, garantindo durabilidade e precisão em aplicações exigentes.",
     subtitle: "Segmentos Diamantados",
@@ -110,6 +116,7 @@ export const linhas: Linha[] = [
     slug: "ferramentas-diversas",
     name: "Ferramentas Diversas",
     image: "/cat-ferramentas-diversas.avif",
+    categorySlug: "ferramentaria-geral",
     cardDescription:
       "Disponibilizamos uma ampla variedade de ferramentas manuais e acessórios para uso profissional e doméstico, ideais para aplicações em metal, madeira, alvenaria e outros materiais. Qualidade, resistência e praticidade para o dia a dia no canteiro de obras, oficinas ou manutenção em geral.",
     intro: [
@@ -134,6 +141,7 @@ export const linhas: Linha[] = [
     slug: "repastilhamento",
     name: "Repastilhamento",
     image: "/cat-repastilhamento.avif",
+    categorySlug: "recapagem",
     cardDescription:
       "Com a expertise da Trust Tools na fabricação e no desenvolvimento de ferramentas diamantadas, oferecemos o serviço de repastilhamento de serras, coroas, cálices e fresas, garantindo economia de até 40% para nossos clientes e contribuindo para um processo mais sustentável.",
     intro: [

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/site/reveal";
 import { HeroCarousel } from "@/components/site/hero-carousel";
 import { ClientLogos } from "@/components/site/client-logos";
-import { whatsappUrl, factoryPhoto } from "@/lib/utils";
+import { whatsappUrl } from "@/lib/utils";
 import { linhas } from "@/lib/linhas";
 
 export const revalidate = 300;
@@ -58,72 +58,6 @@ export default function HomePage() {
                 </Link>
               </Reveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ESPECIALIDADE: LAJES ALVEOLARES PROTENDIDAS */}
-      <section className="tt-section pt-0">
-        <div className="tt-container">
-          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
-            <Reveal className="relative aspect-[4/3] lg:aspect-[5/6] rounded-[28px] overflow-hidden border border-line shadow-lg order-2 lg:order-1">
-              <Image
-                src={factoryPhoto(7)}
-                alt="Disco diamantado de grande porte para corte de lajes alveolares protendidas"
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 55vw, 100vw"
-              />
-              <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 40%, rgba(6,30,77,.55) 100%)" }} />
-              <div className="absolute bottom-6 left-6 right-6 z-10">
-                <span className="inline-block px-3 py-1.5 rounded-full bg-accent/95 text-brand-900 text-xs font-bold tracking-wider uppercase">
-                  Especialidade Trust Tools
-                </span>
-              </div>
-            </Reveal>
-
-            <Reveal className="order-1 lg:order-2">
-              <span className="eyebrow">CORTE PESADO</span>
-              <h2 className="h-section mt-4">
-                <span className="grad-text">Lajes alveolares protendidas</span> — onde a Trust Tools é referência.
-              </h2>
-              <p className="text-lead mt-5">
-                Discos diamantados de grande diâmetro (<strong className="text-ink">600mm a 1200mm</strong>) projetados pra cortar lajes alveolares protendidas, vigas e pilares de concreto pré-fabricado com precisão e durabilidade.
-              </p>
-
-              <div className="mt-7 grid gap-4">
-                <div className="flex gap-4 items-start">
-                  <span className="flex-shrink-0 grid h-11 w-11 place-items-center rounded-xl text-white font-display font-bold" style={{ background: "var(--grad-primary)" }}>1</span>
-                  <div>
-                    <h3 className="text-base text-ink mb-1">Linha completa TR-760</h3>
-                    <p className="text-sm text-ink-2 m-0">Disco de corte Ø600 a 1200mm para concreto curado, alta durabilidade e baixo custo por metro cortado.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-start">
-                  <span className="flex-shrink-0 grid h-11 w-11 place-items-center rounded-xl text-white font-display font-bold" style={{ background: "var(--grad-primary)" }}>2</span>
-                  <div>
-                    <h3 className="text-base text-ink mb-1">Repastilhamento de segmentos</h3>
-                    <p className="text-sm text-ink-2 m-0">Devolve a vida útil do disco com até <strong className="text-ink">40% de economia</strong> versus comprar novo. Lead-time curto, devolução do mesmo casco.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-start">
-                  <span className="flex-shrink-0 grid h-11 w-11 place-items-center rounded-xl text-white font-display font-bold" style={{ background: "var(--grad-primary)" }}>3</span>
-                  <div>
-                    <h3 className="text-base text-ink mb-1">Atendimento técnico de fábrica</h3>
-                    <p className="text-sm text-ink-2 m-0">Recomendação por tipo de concreto, máquina e produtividade desejada — direto de quem fabrica.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/catalogo?categoria=lajes-alveolares-protendidas" className="btn btn-primary">
-                  Ver linha completa <span className="arrow">→</span>
-                </Link>
-                <a href={whatsappUrl("Olá! Tenho interesse em discos pra lajes alveolares protendidas.")} target="_blank" rel="noopener" className="btn btn-ghost">
-                  Falar com especialista
-                </a>
-              </div>
-            </Reveal>
           </div>
         </div>
       </section>
