@@ -20,11 +20,11 @@ export function Footer() {
           <div>
             <Link href="/" className="inline-flex items-center mb-3.5" aria-label="Trust Tools — início">
               <Image
-                src="/logo-tt.png"
+                src="/logo-symbol.png"
                 alt="Trust Tools"
-                width={200}
-                height={110}
-                className="h-12 w-auto object-contain brightness-0 invert opacity-90"
+                width={219}
+                height={186}
+                className="h-14 w-auto object-contain brightness-0 invert opacity-90"
               />
             </Link>
             <p className="max-w-xs text-sm text-white/65 leading-relaxed">

@@ -35,10 +35,10 @@ export function Header() {
       <div className="tt-container flex h-full items-center justify-between gap-6">
         <Link href="/" className="flex items-center" aria-label="Trust Tools — início">
           <Image
-            src="/logo-tt.png"
+            src="/logo-symbol.png"
             alt="Trust Tools"
-            width={160}
-            height={88}
+            width={219}
+            height={186}
             className="h-11 w-auto object-contain"
             priority
           />
