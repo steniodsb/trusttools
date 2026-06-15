@@ -18,15 +18,14 @@ export function Footer() {
       <div className="tt-container relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-8 lg:gap-12 mb-14">
           <div>
-            <Link href="/" className="flex items-center gap-3 text-white font-display font-bold text-[1.1rem] mb-3.5">
+            <Link href="/" className="inline-flex items-center mb-3.5" aria-label="Trust Tools — início">
               <Image
                 src="/logo-tt.png"
                 alt="Trust Tools"
-                width={42}
-                height={42}
-                className="h-[42px] w-[42px] object-contain brightness-0 invert opacity-90"
+                width={200}
+                height={110}
+                className="h-12 w-auto object-contain brightness-0 invert opacity-90"
               />
-              <span>Trust Tools</span>
             </Link>
             <p className="max-w-xs text-sm text-white/65 leading-relaxed">
               Trust Tools Importação e Exportação Ltda. Ferramentas industriais que sustentam a sua produção.
