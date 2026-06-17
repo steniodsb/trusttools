@@ -1,63 +1,89 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 /**
- * Hero escuro da página Trust Tools (Quem Somos).
- * "Trust Tools" centralizado, com imagens em baixa opacidade fazendo
- * crossfade ao fundo.
+ * Hero da página Trust Tools (Quem Somos).
+ * "Trust Tools" centralizado sobre um carrossel de fotos reais da fábrica,
+ * com o fundo bem visível (overlay leve apenas para legibilidade do texto).
  */
 const bgImages = [
-  "/trust-tools-hero.avif",
-  "/cat-construcao.avif",
-  "/cat-pedras.avif",
-  "/cat-segmentos.avif",
+  "/fabrica/fabrica-1.jpg",
+  "/fabrica/fabrica-2.jpg",
+  "/fabrica/fabrica-3.jpg",
+  "/fabrica/fabrica-4.jpg",
 ];
 
-const FADE_DUR = 28; // segundos (ciclo completo)
+const AUTOPLAY_MS = 5000;
 
 export function TrustHero() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % bgImages.length);
+    }, AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <section
-      className="hero-dark relative overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #0a0e1a 0%, #03060d 100%)" }}
-    >
-      {/* Fundo: imagens em crossfade, baixa opacidade */}
-      <div aria-hidden className="absolute inset-0 overflow-hidden">
+    <section className="hero-dark relative overflow-hidden">
+      {/* Carrossel de imagens da fábrica (fundo) */}
+      <div aria-hidden className="absolute inset-0 overflow-hidden bg-[#03060d]">
         {bgImages.map((src, i) => (
           <div
             key={src}
-            className="tt-bg-fade absolute inset-0"
-            style={{
-              animationDuration: `${FADE_DUR}s`,
-              animationDelay: `${(i * FADE_DUR) / bgImages.length}s`,
-            }}
+            className="hero-slide absolute inset-0"
+            style={{ opacity: i === index ? 1 : 0 }}
           >
-            <Image src={src} alt="" fill className="object-cover" sizes="100vw" />
+            <Image
+              src={src}
+              alt=""
+              fill
+              priority={i === 0}
+              className="object-cover"
+              sizes="100vw"
+            />
           </div>
         ))}
-        {/* máscara escura por cima das imagens */}
+        {/* overlay leve: escurece só o necessário para o texto ficar legível */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(3,6,13,.78) 0%, rgba(3,6,13,.72) 100%)",
+              "linear-gradient(180deg, rgba(3,6,13,.45) 0%, rgba(3,6,13,.35) 45%, rgba(3,6,13,.6) 100%)",
+          }}
+        />
+        {/* foco radial atrás do título para contraste */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(45% 60% at 50% 50%, rgba(3,6,13,.55), transparent 75%)",
           }}
         />
       </div>
 
-      {/* glow sutil */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(55% 50% at 50% 35%, rgba(30,99,233,.22), transparent 70%)",
-        }}
-      />
-
-      <div className="relative z-10 tt-container flex min-h-[clamp(360px,52vh,520px)] flex-col items-center justify-center text-center py-24">
-        <h1 className="h-display">
+      <div className="relative z-10 tt-container flex min-h-[clamp(380px,56vh,560px)] flex-col items-center justify-center text-center py-24">
+        <h1 className="h-display" style={{ textShadow: "0 2px 30px rgba(0,0,0,.5)" }}>
           <span className="grad-text">Trust Tools</span>
         </h1>
+
+        {/* Dots */}
+        <div className="mt-10 flex items-center gap-3" role="tablist" aria-label="Selecionar imagem">
+          {bgImages.map((src, i) => (
+            <button
+              key={src}
+              type="button"
+              role="tab"
+              aria-selected={i === index}
+              aria-label={`Imagem ${i + 1}`}
+              onClick={() => setIndex(i)}
+              className="hero-dot"
+              data-active={i === index}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
