@@ -18,15 +18,17 @@ const catalogos = [
   {
     icon: Factory,
     title: "Ferramentas Fabricadas",
+    subtitle: "Engenharia e Performance para Aplicações Exigentes",
     description:
-      "Nossa linha de ferramentas diamantadas desenvolvidas e fabricadas pela Trust Tools.",
+      "Ferramentas diamantadas desenvolvidas e fabricadas pela Trust Tools para corte, perfuração, desbaste e polimento em concreto, refratários, rochas ornamentais e aplicações especiais.",
     file: "/catalogo-ferramentas-fabricadas.pdf",
   },
   {
     icon: Ship,
     title: "Ferramentas Importadas",
+    subtitle: "Soluções Profissionais para Construção e Indústria",
     description:
-      "Linha completa de ferramentas e acessórios importados para uso profissional e industrial.",
+      "Linha completa de ferramentas, acessórios e consumíveis selecionados para oferecer produtividade, qualidade e excelente custo-benefício.",
     file: "/catalogo-ferramentas-importadas.pdf",
   },
 ];
@@ -54,7 +56,8 @@ export default function CatalogosPage() {
                     >
                       <Icon size={26} />
                     </span>
-                    <h2 className="text-2xl mb-2">{cat.title}</h2>
+                    <h2 className="text-2xl mb-1">{cat.title}</h2>
+                    <p className="text-sm font-display font-semibold text-brand-700 mb-3">{cat.subtitle}</p>
                     <p className="text-ink-2 mb-7 flex-1">{cat.description}</p>
                     <a
                       href={cat.file}

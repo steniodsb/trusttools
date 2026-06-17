@@ -1,10 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Factory, Ship } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
 import { HeroCarousel } from "@/components/site/hero-carousel";
 import { ClientLogos } from "@/components/site/client-logos";
 import { whatsappUrl } from "@/lib/utils";
 import { linhas } from "@/lib/linhas";
+
+const catalogos = [
+  {
+    icon: Factory,
+    title: "Ferramentas Fabricadas",
+    subtitle: "Engenharia e Performance para Aplicações Exigentes",
+    description:
+      "Ferramentas diamantadas desenvolvidas e fabricadas pela Trust Tools para corte, perfuração, desbaste e polimento em concreto, refratários, rochas ornamentais e aplicações especiais.",
+  },
+  {
+    icon: Ship,
+    title: "Ferramentas Importadas",
+    subtitle: "Soluções Profissionais para Construção e Indústria",
+    description:
+      "Linha completa de ferramentas, acessórios e consumíveis selecionados para oferecer produtividade, qualidade e excelente custo-benefício.",
+  },
+];
 
 export const revalidate = 300;
 
@@ -58,6 +76,42 @@ export default function HomePage() {
                 </Link>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CATÁLOGOS — Fabricadas / Importadas */}
+      <section className="tt-section pt-0">
+        <div className="tt-container">
+          <Reveal className="section-head">
+            <span className="eyebrow">NOSSOS CATÁLOGOS</span>
+            <h2 className="h-section">
+              Fabricação própria e <span className="grad-text">linha importada</span>.
+            </h2>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 gap-6 stagger">
+            {catalogos.map((cat) => {
+              const Icon = cat.icon;
+              return (
+                <Reveal key={cat.title}>
+                  <div className="tt-card p-8 h-full flex flex-col items-start">
+                    <span
+                      className="grid h-14 w-14 place-items-center rounded-2xl text-white mb-5 shadow-[0_8px_20px_rgba(30,99,233,.35)]"
+                      style={{ background: "var(--grad-primary)" }}
+                    >
+                      <Icon size={26} />
+                    </span>
+                    <h3 className="text-2xl mb-1">{cat.title}</h3>
+                    <p className="text-sm font-display font-semibold text-brand-700 mb-3">{cat.subtitle}</p>
+                    <p className="text-ink-2 mb-7 flex-1">{cat.description}</p>
+                    <Link href="/catalogos" className="btn btn-primary">
+                      Ver Catálogo <span className="arrow">→</span>
+                    </Link>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>

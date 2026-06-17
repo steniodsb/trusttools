@@ -5,15 +5,25 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { whatsappUrl } from "@/lib/utils";
 
-type Slide = {
-  image: string;
-  title: string;
-};
+const slides = [
+  "/hero-segmentos.avif",
+  "/hero-diversas.avif",
+  "/hero-construcao.avif",
+];
 
-const slides: Slide[] = [
-  { image: "/hero-segmentos.avif", title: "Ferramentas para todo tipo de segmento" },
-  { image: "/hero-diversas.avif", title: "Diversas ferramentas para você!" },
-  { image: "/hero-construcao.avif", title: "Conheça nossa linha de construção" },
+const segmentos = [
+  "Construção Civil",
+  "Pré-Fabricados",
+  "Refratários",
+  "Rochas Ornamentais",
+  "Indústria",
+];
+
+const diferenciais = [
+  "Fabricação própria",
+  "Desenvolvimento técnico",
+  "Repastilhamento",
+  "Pronta entrega",
 ];
 
 const AUTOPLAY_MS = 6000;
@@ -42,28 +52,27 @@ export function HeroCarousel() {
       onMouseLeave={() => setPaused(false)}
     >
       {/* Slides (background) */}
-      {slides.map((slide, i) => (
+      {slides.map((src, i) => (
         <div
-          key={slide.image}
+          key={src}
           className="hero-slide absolute inset-0"
           style={{ opacity: i === index ? 1 : 0 }}
-          aria-hidden={i !== index}
+          aria-hidden
         >
           <Image
-            src={slide.image}
-            alt={slide.title}
+            src={src}
+            alt=""
             fill
             priority={i === 0}
             className="object-cover"
             sizes="100vw"
           />
-          {/* máscara escura para legibilidade */}
           <div
             aria-hidden
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(3,6,13,.62) 0%, rgba(3,6,13,.55) 45%, rgba(3,6,13,.78) 100%)",
+                "linear-gradient(180deg, rgba(3,6,13,.66) 0%, rgba(3,6,13,.58) 45%, rgba(3,6,13,.8) 100%)",
             }}
           />
         </div>
@@ -79,23 +88,24 @@ export function HeroCarousel() {
         }}
       />
 
-      {/* Conteúdo */}
-      <div className="relative z-10 tt-container flex min-h-[clamp(540px,82vh,760px)] flex-col items-center justify-center text-center py-24">
-        <span className="eyebrow mb-6">IMPORTAÇÃO • DISTRIBUIÇÃO • SUPORTE TÉCNICO</span>
+      {/* Conteúdo (fixo) */}
+      <div className="relative z-10 tt-container flex min-h-[clamp(560px,84vh,780px)] flex-col items-center justify-center text-center py-24">
+        <h1 className="h-display max-w-4xl">
+          Soluções Diamantadas para <span className="grad-text">Corte, Perfuração e Desbaste</span> Industrial
+        </h1>
 
-        <div className="hero-carousel-titles relative w-full max-w-4xl">
-          {slides.map((slide, i) => (
-            <h1
-              key={slide.image}
-              className={`h-display transition-all duration-700 ${
-                i === index
-                  ? "opacity-100 translate-y-0"
-                  : "pointer-events-none absolute inset-0 opacity-0 translate-y-4"
-              }`}
-              aria-hidden={i !== index}
+        <p className="mt-6 text-base md:text-lg font-display font-medium text-white/85 max-w-3xl">
+          {segmentos.join("  •  ")}
+        </p>
+
+        <div className="mt-7 flex flex-wrap justify-center gap-2.5">
+          {diferenciais.map((d) => (
+            <span
+              key={d}
+              className="rounded-full border border-white/20 bg-white/[.07] px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur"
             >
-              {slide.title}
-            </h1>
+              {d}
+            </span>
           ))}
         </div>
 
@@ -114,14 +124,14 @@ export function HeroCarousel() {
         </div>
 
         {/* Dots */}
-        <div className="mt-12 flex items-center gap-3" role="tablist" aria-label="Selecionar slide">
-          {slides.map((slide, i) => (
+        <div className="mt-12 flex items-center gap-3" role="tablist" aria-label="Selecionar imagem de fundo">
+          {slides.map((src, i) => (
             <button
-              key={slide.image}
+              key={src}
               type="button"
               role="tab"
               aria-selected={i === index}
-              aria-label={`Ir para o slide ${i + 1}`}
+              aria-label={`Imagem ${i + 1}`}
               onClick={() => go(i)}
               className="hero-dot"
               data-active={i === index}
@@ -133,7 +143,7 @@ export function HeroCarousel() {
       {/* Setas */}
       <button
         type="button"
-        aria-label="Slide anterior"
+        aria-label="Imagem anterior"
         onClick={() => go(index - 1)}
         className="hero-arrow left-4 md:left-7"
       >
@@ -143,7 +153,7 @@ export function HeroCarousel() {
       </button>
       <button
         type="button"
-        aria-label="Próximo slide"
+        aria-label="Próxima imagem"
         onClick={() => go(index + 1)}
         className="hero-arrow right-4 md:right-7"
       >

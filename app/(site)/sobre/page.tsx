@@ -10,11 +10,11 @@ import { siteConfig, whatsappUrl } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Trust Tools",
   description:
-    "A Trust Tools nasceu em 2021 para oferecer um modelo inovador em ferramentas, com matriz em Diadema-SP e filial em Jundiaí-SP especializada em ferramentas diamantadas.",
+    "Há mais de 25 anos no mercado de ferramentas industriais e materiais superduros. Importação, distribuição, fabricação e manutenção de ferramentas diamantadas, com unidades em Diadema-SP e Jundiaí-SP.",
 };
 
 const stats: Array<{ target: number; prefix?: string; suffix?: string; label: string }> = [
-  { target: 12, prefix: "+", suffix: " anos", label: "abastecendo a indústria" },
+  { target: 25, prefix: "+", suffix: " anos", label: "no mercado de ferramentas" },
   { target: 5000, prefix: "+", label: "SKUs em estoque pronto" },
   { target: 2, suffix: " CDs", label: "centros de distribuição em SP" },
   { target: 48, suffix: "h", label: "entrega média no Sudeste" },
@@ -54,31 +54,31 @@ export default function SobrePage() {
             <Reveal>
               <span className="eyebrow">QUEM SOMOS</span>
               <h2 className="h-section mt-4">
-                Nossa <span className="grad-text">história</span>
+                Sobre a <span className="grad-text">Trust Tools</span>
               </h2>
 
               <div className="text-lead mt-6 space-y-4">
                 <p>
-                  A Trust Tools nasceu em <strong className="text-ink">2021</strong>, em um
-                  momento de transformação, quando dois amigos decidiram unir suas mais de duas
-                  décadas de experiência em comércio exterior e ferramentas abrasivas para criar
-                  uma nova abordagem de negócios.
+                  Há mais de <strong className="text-ink">25 anos</strong> atuando no mercado de
+                  ferramentas industriais e materiais superduros, a Trust Tools oferece soluções de
+                  alta performance para empresas que buscam produtividade, qualidade e
+                  confiabilidade.
                 </p>
                 <p>
-                  Nosso objetivo é oferecer um modelo de trabalho inovador, sempre alinhado às
-                  demandas do mercado, com foco em qualidade e eficiência.
+                  Atuamos na importação, distribuição, fabricação e manutenção de ferramentas
+                  diamantadas para os segmentos de construção civil, concreto, refratários, pedras
+                  naturais e indústria em geral.
                 </p>
                 <p>
-                  Com nossa matriz estrategicamente localizada em <strong className="text-ink">Diadema–SP</strong>,
-                  na região do ABCD Paulista, próximo à Mercedes-Benz, temos um amplo estoque de
-                  ferramentas prontas para uso imediato, garantindo agilidade no atendimento.
+                  Nossa unidade de <strong className="text-ink">Diadema</strong> garante agilidade
+                  logística e disponibilidade de produtos, enquanto nossa estrutura em{" "}
+                  <strong className="text-ink">Jundiaí</strong> é dedicada ao desenvolvimento de
+                  soluções especiais, repastilhamento e fabricação de ferramentas sob medida.
                 </p>
                 <p>
-                  Já nossa filial, situada em <strong className="text-ink">Jundiaí–SP</strong>, no
-                  bairro Santa Gertrudes, é onde desenvolvemos e aprimoramos ferramentas
-                  diamantadas, com fabricação e manutenção sob medida para entregar performance e
-                  qualidade excepcionais. Na Trust Tools, estamos comprometidos em transformar
-                  desafios em soluções de alta precisão.
+                  A combinação entre experiência técnica, tecnologia e atendimento próximo aos
+                  clientes permite que a Trust Tools transforme desafios de produção em resultados
+                  concretos.
                 </p>
               </div>
             </Reveal>
