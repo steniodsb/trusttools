@@ -7,6 +7,7 @@ import {
   Package,
   Tags,
   MessageSquare,
+  Megaphone,
   LogOut,
   Menu,
   X,
@@ -20,6 +21,7 @@ const nav = [
   { href: "/admin/produtos", label: "Produtos", icon: Package },
   { href: "/admin/categorias", label: "Categorias", icon: Tags },
   { href: "/admin/leads", label: "Leads", icon: MessageSquare },
+  { href: "/admin/marketing", label: "Marketing", icon: Megaphone },
 ];
 
 export function Sidebar({ userEmail }: { userEmail: string }) {

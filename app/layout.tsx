@@ -3,6 +3,8 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { siteConfig } from "@/lib/utils";
+import { getSiteSettings } from "@/lib/settings";
+import { MarketingScripts } from "@/components/site/marketing-scripts";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,16 +56,19 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const settings = await getSiteSettings();
+
   return (
     <html lang="pt-BR" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body>
         {children}
         <Toaster position="top-right" richColors />
+        <MarketingScripts settings={settings} />
       </body>
     </html>
   );

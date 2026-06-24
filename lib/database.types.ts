@@ -42,3 +42,15 @@ export type ProductWithRelations = Product & {
   category: Category | null;
   images: ProductImage[];
 };
+
+export type SiteSettings = {
+  id: number;
+  gtm_id: string | null;
+  ga4_id: string | null;
+  google_ads_id: string | null;
+  meta_pixel_id: string | null;
+  tiktok_pixel_id: string | null;
+  head_scripts: string | null;
+  body_scripts: string | null;
+  updated_at: string;
+};
