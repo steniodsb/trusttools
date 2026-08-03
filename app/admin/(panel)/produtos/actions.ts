@@ -29,7 +29,9 @@ type ProductInput = {
   display_order?: number;
 };
 
-export async function createProduct(input: ProductInput) {
+export async function createProduct(
+  input: ProductInput,
+): Promise<{ success: true; id: string } | { success: false; error: string }> {
   await requireAuth();
   const admin = createAdminClient();
   const slug = input.slug?.trim() || slugify(input.name);

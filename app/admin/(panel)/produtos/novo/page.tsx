@@ -21,7 +21,7 @@ export default async function NovoProdutoPage() {
       <div className="mb-8">
         <h1 className="h-section text-[1.75rem]">Novo produto</h1>
         <p className="text-ink-2 mt-1">
-          Crie o produto agora. As fotos podem ser adicionadas depois de salvar.
+          Preencha os dados e já adicione as fotos. Elas sobem assim que o produto for criado.
         </p>
       </div>
 

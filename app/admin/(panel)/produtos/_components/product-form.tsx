@@ -3,7 +3,8 @@ import { useState, useTransition, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, X, Plus } from "lucide-react";
 import { toast } from "sonner";
-import { createProduct, updateProduct } from "../actions";
+import { createProduct, updateProduct, uploadProductImage } from "../actions";
+import { PendingImageUpload, type StagedImage } from "./pending-image-upload";
 import type { Category, Product } from "@/lib/database.types";
 import { slugify } from "@/lib/utils";
 
@@ -33,6 +34,11 @@ export function ProductForm({ categories, product }: Props) {
   const [active, setActive] = useState(product?.active ?? true);
   const [featured, setFeatured] = useState(product?.featured ?? false);
   const [displayOrder, setDisplayOrder] = useState(product?.display_order ?? 0);
+  // Fotos escolhidas antes do produto existir — sobem depois de criar.
+  const [staged, setStaged] = useState<StagedImage[]>([]);
+  const [uploadingPhotos, setUploadingPhotos] = useState(false);
+
+  const busy = pending || uploadingPhotos;
 
   function handleNameChange(v: string) {
     setName(v);
@@ -52,6 +58,32 @@ export function ProductForm({ categories, product }: Props) {
       setTags([...tags, t]);
       setNewTag("");
     }
+  }
+
+  /** Envia as fotos escolhidas antes do produto existir. A primeira vira a principal. */
+  async function uploadStaged(productId: string) {
+    setUploadingPhotos(true);
+    let failed = 0;
+
+    for (const [i, img] of staged.entries()) {
+      const fd = new FormData();
+      fd.append("file", img.file);
+      fd.append("product_id", productId);
+      fd.append("alt", img.file.name.replace(/\.[^.]+$/, ""));
+      fd.append("is_primary", String(i === 0));
+
+      const r = await uploadProductImage(fd);
+      if (!r.success) {
+        failed++;
+        toast.error(`${img.file.name}: ${r.error}`);
+      }
+    }
+
+    const sent = staged.length - failed;
+    if (sent > 0) toast.success(sent === 1 ? "Foto enviada" : `${sent} fotos enviadas`);
+    staged.forEach((img) => URL.revokeObjectURL(img.preview));
+    setStaged([]);
+    setUploadingPhotos(false);
   }
 
   function onSubmit(e: FormEvent) {
@@ -80,20 +112,26 @@ export function ProductForm({ categories, product }: Props) {
     };
 
     startTransition(async () => {
-      const result = product
-        ? await updateProduct(product.id, payload)
-        : await createProduct(payload);
-
-      if (result.success) {
-        toast.success(product ? "Produto atualizado" : "Produto criado");
-        if (!product && "id" in result) {
-          router.push(`/admin/produtos/${result.id}`);
-        } else {
-          router.refresh();
+      if (product) {
+        const result = await updateProduct(product.id, payload);
+        if (!result.success) {
+          toast.error(result.error || "Erro ao salvar");
+          return;
         }
-      } else {
-        toast.error(result.error || "Erro ao salvar");
+        toast.success("Produto atualizado");
+        router.refresh();
+        return;
       }
+
+      const result = await createProduct(payload);
+      if (!result.success) {
+        toast.error(result.error || "Erro ao salvar");
+        return;
+      }
+
+      toast.success("Produto criado");
+      if (staged.length) await uploadStaged(result.id);
+      router.push(`/admin/produtos/${result.id}`);
     });
   }
 
@@ -101,34 +139,34 @@ export function ProductForm({ categories, product }: Props) {
     <form onSubmit={onSubmit} className="space-y-6">
       {/* Básico */}
       <Section title="Informações básicas">
-        <Field label="Nome do produto *" required>
+        <Field label="Nome do produto" required>
           <input
             type="text"
             required
             value={name}
             onChange={(e) => handleNameChange(e.target.value)}
-            disabled={pending}
+            disabled={busy}
             className={inputCls}
             placeholder="Ex.: Disco diamantado 350mm"
           />
         </Field>
-        <Field label="Slug (URL) *" hint={`URL: /produtos/${slug || "..."}`}>
+        <Field label="Slug (URL)" required hint={`URL: /produtos/${slug || "..."}`}>
           <input
             type="text"
             required
             value={slug}
             onChange={(e) => { setSlug(slugify(e.target.value)); setSlugTouched(true); }}
-            disabled={pending}
+            disabled={busy}
             className={inputCls}
             placeholder="disco-diamantado-350mm"
           />
         </Field>
-        <Field label="Categoria *">
+        <Field label="Categoria" required>
           <select
             required
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            disabled={pending}
+            disabled={busy}
             className={inputCls}
           >
             <option value="">Selecione...</option>
@@ -142,7 +180,7 @@ export function ProductForm({ categories, product }: Props) {
             type="text"
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
-            disabled={pending}
+            disabled={busy}
             className={inputCls}
             placeholder="Ex.: Bosch, Norton..."
           />
@@ -155,7 +193,7 @@ export function ProductForm({ categories, product }: Props) {
           <textarea
             value={shortDesc}
             onChange={(e) => setShortDesc(e.target.value)}
-            disabled={pending}
+            disabled={busy}
             rows={3}
             maxLength={200}
             className={inputCls}
@@ -166,13 +204,20 @@ export function ProductForm({ categories, product }: Props) {
           <textarea
             value={longDesc}
             onChange={(e) => setLongDesc(e.target.value)}
-            disabled={pending}
+            disabled={busy}
             rows={8}
             className={inputCls}
             placeholder="Detalhes técnicos, diferenciais, instruções..."
           />
         </Field>
       </Section>
+
+      {/* Fotos — só no cadastro; na edição o painel lateral cuida disso */}
+      {!product && (
+        <Section title="Fotos do produto">
+          <PendingImageUpload items={staged} onChange={setStaged} disabled={busy} />
+        </Section>
+      )}
 
       {/* Aplicações */}
       <Section title="Aplicações">
@@ -183,7 +228,7 @@ export function ProductForm({ categories, product }: Props) {
           inputValue={newApp}
           onInputChange={setNewApp}
           placeholder="Ex.: Corte de granito"
-          disabled={pending}
+          disabled={busy}
         />
       </Section>
 
@@ -200,7 +245,7 @@ export function ProductForm({ categories, product }: Props) {
                   next[i].key = e.target.value;
                   setSpecs(next);
                 }}
-                disabled={pending}
+                disabled={busy}
                 className={inputCls}
                 placeholder="Característica"
               />
@@ -212,14 +257,14 @@ export function ProductForm({ categories, product }: Props) {
                   next[i].value = e.target.value;
                   setSpecs(next);
                 }}
-                disabled={pending}
+                disabled={busy}
                 className={inputCls}
                 placeholder="Valor"
               />
               <button
                 type="button"
                 onClick={() => setSpecs(specs.filter((_, idx) => idx !== i))}
-                disabled={pending}
+                disabled={busy}
                 className="h-11 w-11 grid place-items-center rounded-lg text-ink-3 hover:bg-red-50 hover:text-red-700 transition"
                 aria-label="Remover"
               >
@@ -230,7 +275,7 @@ export function ProductForm({ categories, product }: Props) {
           <button
             type="button"
             onClick={() => setSpecs([...specs, { key: "", value: "" }])}
-            disabled={pending}
+            disabled={busy}
             className="btn-link text-sm"
           >
             <Plus className="h-4 w-4" /> Adicionar especificação
@@ -247,7 +292,7 @@ export function ProductForm({ categories, product }: Props) {
           inputValue={newTag}
           onInputChange={setNewTag}
           placeholder="Ex.: diamante, profissional"
-          disabled={pending}
+          disabled={busy}
         />
       </Section>
 
@@ -259,7 +304,7 @@ export function ProductForm({ categories, product }: Props) {
               type="checkbox"
               checked={active}
               onChange={(e) => setActive(e.target.checked)}
-              disabled={pending}
+              disabled={busy}
               className="h-4 w-4 accent-brand-500"
             />
             <span>
@@ -272,7 +317,7 @@ export function ProductForm({ categories, product }: Props) {
               type="checkbox"
               checked={featured}
               onChange={(e) => setFeatured(e.target.checked)}
-              disabled={pending}
+              disabled={busy}
               className="h-4 w-4 accent-brand-500"
             />
             <span>
@@ -285,7 +330,7 @@ export function ProductForm({ categories, product }: Props) {
               type="number"
               value={displayOrder}
               onChange={(e) => setDisplayOrder(parseInt(e.target.value || "0", 10))}
-              disabled={pending}
+              disabled={busy}
               className={inputCls + " max-w-[120px]"}
             />
           </Field>
@@ -296,13 +341,22 @@ export function ProductForm({ categories, product }: Props) {
         <button
           type="button"
           onClick={() => router.push("/admin/produtos")}
-          disabled={pending}
+          disabled={busy}
           className="btn btn-ghost btn-sm"
         >
           Cancelar
         </button>
-        <button type="submit" disabled={pending} className="btn btn-primary btn-sm">
-          {pending ? <><Loader2 className="h-4 w-4 animate-spin" /> Salvando...</> : product ? "Salvar alterações" : "Criar produto"}
+        <button type="submit" disabled={busy} className="btn btn-primary btn-sm">
+          {busy ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              {uploadingPhotos ? "Enviando fotos..." : "Salvando..."}
+            </>
+          ) : product ? (
+            "Salvar alterações"
+          ) : (
+            "Criar produto"
+          )}
         </button>
       </div>
     </form>
