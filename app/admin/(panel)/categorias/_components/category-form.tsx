@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { createCategory, updateCategory, deleteCategoryImage } from "../actions";
 import { CategoryImageUpload } from "./category-image-upload";
 import type { Category } from "@/lib/database.types";
-import { slugify } from "@/lib/utils";
 
 const DESC_MAX = 200;
 
@@ -14,8 +13,6 @@ export function CategoryForm({ category }: { category?: Category }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [name, setName] = useState(category?.name || "");
-  const [slug, setSlug] = useState(category?.slug || "");
-  const [slugTouched, setSlugTouched] = useState(!!category);
   const [description, setDescription] = useState(category?.description || "");
   const [imageUrl, setImageUrl] = useState(category?.image_url || "");
   const [displayOrder, setDisplayOrder] = useState(category?.display_order ?? 0);
@@ -23,11 +20,6 @@ export function CategoryForm({ category }: { category?: Category }) {
   const initialImage = category?.image_url || "";
   /** Uploads feitos nesta sessão — os que não forem salvos viram órfãos. */
   const uploaded = useRef<string[]>([]);
-
-  function onName(v: string) {
-    setName(v);
-    if (!slugTouched) setSlug(slugify(v));
-  }
 
   /** Apaga do Storage o que não ficou em uso. Falha aqui não bloqueia o salvamento. */
   function discard(urls: string[]) {
@@ -54,13 +46,14 @@ export function CategoryForm({ category }: { category?: Category }) {
 
     const payload = {
       name: name.trim(),
-      slug: slug.trim() || slugify(name),
       description: description.trim(),
       image_url: imageUrl.trim(),
       display_order: displayOrder,
     };
 
     startTransition(async () => {
+      // Slug fica por conta da action: gerado do nome ao criar, intocado ao editar
+      // (a URL já está publicada).
       const r = category
         ? await updateCategory(category.id, payload)
         : await createCategory(payload);
@@ -80,38 +73,18 @@ export function CategoryForm({ category }: { category?: Category }) {
     <form onSubmit={onSubmit} className="space-y-6">
       <Section
         title="Identificação"
-        description="Como a linha de produtos aparece no catálogo e na URL."
+        description="Como a linha de produtos aparece no catálogo. A URL é gerada a partir do nome."
       >
         <Field label="Nome" required>
           <input
             type="text"
             required
             value={name}
-            onChange={(e) => onName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             disabled={pending}
             className={input}
             placeholder="Ex.: Construção Civil"
           />
-        </Field>
-
-        <Field label="Slug (URL)" hint="Gerado a partir do nome. Mudar o slug quebra links já compartilhados.">
-          <div className="flex items-stretch rounded-lg border border-line-strong bg-white focus-within:border-brand-500 focus-within:ring-4 focus-within:ring-brand-500/10 transition overflow-hidden">
-            <span className="hidden sm:grid place-items-center px-3 bg-bg border-r border-line text-sm text-ink-3 whitespace-nowrap">
-              /catalogo?categoria=
-            </span>
-            <input
-              type="text"
-              required
-              value={slug}
-              onChange={(e) => {
-                setSlug(slugify(e.target.value));
-                setSlugTouched(true);
-              }}
-              disabled={pending}
-              className="flex-1 min-w-0 px-3.5 py-2.5 text-ink placeholder:text-ink-3 focus:outline-none disabled:opacity-60"
-              placeholder="construcao-civil"
-            />
-          </div>
         </Field>
 
         <Field

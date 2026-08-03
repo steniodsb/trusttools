@@ -19,6 +19,18 @@ function storagePath(url: string): string | null {
   return match ? match[1] : null;
 }
 
+/** Slug livre a partir do nome: "linha", "linha-2", "linha-3"... */
+async function uniqueSlug(name: string): Promise<string> {
+  const base = slugify(name) || "categoria";
+  const admin = createAdminClient();
+  const { data } = await admin.from("categories").select("slug").like("slug", `${base}%`);
+  const taken = new Set((data || []).map((r) => r.slug));
+  if (!taken.has(base)) return base;
+  let n = 2;
+  while (taken.has(`${base}-${n}`)) n++;
+  return `${base}-${n}`;
+}
+
 type CategoryInput = {
   name: string;
   slug?: string;
@@ -31,7 +43,7 @@ type CategoryInput = {
 export async function createCategory(input: CategoryInput) {
   await requireAuth();
   const admin = createAdminClient();
-  const slug = input.slug?.trim() || slugify(input.name);
+  const slug = input.slug?.trim() || (await uniqueSlug(input.name));
   const { data, error } = await admin
     .from("categories")
     .insert({

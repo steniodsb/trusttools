@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { createProduct, updateProduct, uploadProductImage } from "../actions";
 import { PendingImageUpload, type StagedImage } from "./pending-image-upload";
 import type { Category, Product } from "@/lib/database.types";
-import { slugify } from "@/lib/utils";
 
 type Props = {
   categories: Category[];
@@ -18,8 +17,6 @@ export function ProductForm({ categories, product }: Props) {
   const [pending, startTransition] = useTransition();
 
   const [name, setName] = useState(product?.name || "");
-  const [slug, setSlug] = useState(product?.slug || "");
-  const [slugTouched, setSlugTouched] = useState(!!product);
   const [categoryId, setCategoryId] = useState(product?.category_id || categories[0]?.id || "");
   const [shortDesc, setShortDesc] = useState(product?.short_description || "");
   const [longDesc, setLongDesc] = useState(product?.long_description || "");
@@ -39,11 +36,6 @@ export function ProductForm({ categories, product }: Props) {
   const [uploadingPhotos, setUploadingPhotos] = useState(false);
 
   const busy = pending || uploadingPhotos;
-
-  function handleNameChange(v: string) {
-    setName(v);
-    if (!slugTouched) setSlug(slugify(v));
-  }
 
   function addApp() {
     const t = newApp.trim();
@@ -98,7 +90,6 @@ export function ProductForm({ categories, product }: Props) {
     }
     const payload = {
       name: name.trim(),
-      slug: slug.trim() || slugify(name),
       category_id: categoryId,
       short_description: shortDesc.trim() || undefined,
       long_description: longDesc.trim() || undefined,
@@ -113,6 +104,7 @@ export function ProductForm({ categories, product }: Props) {
 
     startTransition(async () => {
       if (product) {
+        // Slug não é reenviado: a URL já está publicada e mudá-la quebraria links.
         const result = await updateProduct(product.id, payload);
         if (!result.success) {
           toast.error(result.error || "Erro ao salvar");
@@ -123,6 +115,7 @@ export function ProductForm({ categories, product }: Props) {
         return;
       }
 
+      // Sem slug no payload: a action gera um único a partir do nome.
       const result = await createProduct(payload);
       if (!result.success) {
         toast.error(result.error || "Erro ao salvar");
@@ -144,21 +137,10 @@ export function ProductForm({ categories, product }: Props) {
             type="text"
             required
             value={name}
-            onChange={(e) => handleNameChange(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             disabled={busy}
             className={inputCls}
             placeholder="Ex.: Disco diamantado 350mm"
-          />
-        </Field>
-        <Field label="Slug (URL)" required hint={`URL: /produtos/${slug || "..."}`}>
-          <input
-            type="text"
-            required
-            value={slug}
-            onChange={(e) => { setSlug(slugify(e.target.value)); setSlugTouched(true); }}
-            disabled={busy}
-            className={inputCls}
-            placeholder="disco-diamantado-350mm"
           />
         </Field>
         <Field label="Categoria" required>

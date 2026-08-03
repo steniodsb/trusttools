@@ -14,6 +14,18 @@ async function requireAuth() {
   return user;
 }
 
+/** Slug livre a partir do nome: "produto", "produto-2", "produto-3"... */
+async function uniqueSlug(name: string): Promise<string> {
+  const base = slugify(name) || "produto";
+  const admin = createAdminClient();
+  const { data } = await admin.from("products").select("slug").like("slug", `${base}%`);
+  const taken = new Set((data || []).map((r) => r.slug));
+  if (!taken.has(base)) return base;
+  let n = 2;
+  while (taken.has(`${base}-${n}`)) n++;
+  return `${base}-${n}`;
+}
+
 type ProductInput = {
   name: string;
   slug?: string;
@@ -34,7 +46,7 @@ export async function createProduct(
 ): Promise<{ success: true; id: string } | { success: false; error: string }> {
   await requireAuth();
   const admin = createAdminClient();
-  const slug = input.slug?.trim() || slugify(input.name);
+  const slug = input.slug?.trim() || (await uniqueSlug(input.name));
 
   const { data, error } = await admin
     .from("products")
