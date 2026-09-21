@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { whatsappUrl } from "@/lib/utils";
+import { linhas } from "@/lib/linhas";
 
 type Slide = {
   image: string;
@@ -27,14 +28,6 @@ const slides: Slide[] = [
     title: "Soluções para construção civil, pré-fabricados e indústria",
     highlight: "construção civil",
   },
-];
-
-const segmentos = [
-  "Construção Civil",
-  "Pré-Fabricados",
-  "Refratários",
-  "Rochas Ornamentais",
-  "Indústria",
 ];
 
 const diferenciais = [
@@ -136,23 +129,25 @@ export function HeroCarousel() {
         </div>
 
         <p className="mt-6 text-base md:text-lg font-display font-medium text-white/85 max-w-3xl">
-          {segmentos.join("  •  ")}
+          {diferenciais.join("  •  ")}
         </p>
 
-        <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-          {diferenciais.map((d) => (
-            <span
-              key={d}
-              className="rounded-full border border-white/20 bg-white/[.07] px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur"
+        {/* Botões de categoria → página de cada linha */}
+        <nav aria-label="Categorias" className="mt-7 flex flex-wrap justify-center gap-2.5">
+          {linhas.map((l) => (
+            <Link
+              key={l.slug}
+              href={`/linhas/${l.slug}`}
+              className="rounded-full border border-white/25 bg-white/[.08] px-4 py-2 text-sm font-semibold text-white/95 backdrop-blur transition-all hover:-translate-y-0.5 hover:border-transparent hover:bg-brand-500 hover:text-white"
             >
-              {d}
-            </span>
+              {l.name}
+            </Link>
           ))}
-        </div>
+        </nav>
 
         <div className="mt-9 flex flex-wrap justify-center gap-3.5">
-          <Link href="/catalogo" className="btn btn-primary btn-lg">
-            Ver catálogo completo <span className="arrow">→</span>
+          <Link href="/produtos" className="btn btn-primary btn-lg">
+            Conheça nossas linhas <span className="arrow">→</span>
           </Link>
           <a
             href={whatsappUrl("Olá! Quero falar com um especialista.")}

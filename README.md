@@ -13,9 +13,9 @@ app/
 │   ├── layout.tsx      # Header + footer + WhatsApp flutuante
 │   ├── page.tsx        # Home
 │   ├── sobre/
-│   ├── produtos/       # Catálogo + filtros
-│   │   └── [slug]/     # Página individual (SSG)
-│   ├── catalogos/
+│   ├── produtos/       # Landing das linhas (conteúdo fixo em lib/linhas.ts)
+│   ├── linhas/[slug]/  # Página da linha → subcategorias → catálogo em PDF
+│   ├── _desativado/    # Antigo catálogo do banco (/catalogo, /produtos/[slug]) — fora das rotas
 │   └── contato/        # Form com Server Action
 ├── admin/
 │   ├── login/          # Login Supabase Auth
@@ -29,6 +29,7 @@ app/
 └── robots.ts
 
 lib/
+├── linhas.ts           # Linhas, subcategorias e caminho dos PDFs (/public/catalogos)
 ├── supabase/           # Clients (browser, server, admin, proxy)
 ├── database.types.ts   # Tipos
 └── utils.ts            # Helpers + siteConfig

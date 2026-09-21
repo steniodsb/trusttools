@@ -14,6 +14,15 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "steniowebdesigner.com" },
     ],
   },
+  // Catálogo de produtos do banco desativado (set/2026). As URLs antigas
+  // caem na landing de linhas. Código antigo em app/(site)/_desativado.
+  async redirects() {
+    return [
+      { source: "/catalogo", destination: "/produtos", permanent: false },
+      { source: "/catalogos", destination: "/produtos", permanent: false },
+      { source: "/produtos/:slug", destination: "/produtos", permanent: false },
+    ];
+  },
 };
 
 export default nextConfig;
