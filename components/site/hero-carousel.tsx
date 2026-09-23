@@ -20,7 +20,7 @@ const slides: Slide[] = [
   },
   {
     image: "/hero-diversas.avif",
-    title: "Ferramentas profissionais para cada aplicação",
+    title: "Ferramentas e máquinas para cada aplicação",
     highlight: "cada aplicação",
   },
   {

@@ -64,12 +64,17 @@ export const linhas: Linha[] = [
       {
         slug: "calices",
         name: "Cálices",
-        description: "Cálices diamantados para perfuração em concreto armado e estruturas.",
+        description:
+          "Cálices inteiriços e cálices para coroa, com rosca ou ALEC, para perfuratrizes de concreto.",
+        image: "/linhas/calices.webp",
+        pdf: "/catalogos/construcao-calices-coroas.pdf",
       },
       {
         slug: "coroas",
         name: "Coroas",
-        description: "Coroas diamantadas para perfuratrizes, em diversos diâmetros e alturas de segmento.",
+        description: "Coroas segmentadas para perfuração em concreto, de 3/4\" a 6.1/2\", comprimentos de 290 a 400 mm.",
+        image: "/linhas/coroas.webp",
+        pdf: "/catalogos/construcao-calices-coroas.pdf",
       },
       {
         slug: "brocas",
@@ -79,7 +84,10 @@ export const linhas: Linha[] = [
       {
         slug: "concreto-asfalto",
         name: "Concreto e Asfalto",
-        description: "Discos e serras para corte de pisos, pavimentos de concreto e asfalto.",
+        description:
+          "Serras para concreto curado, concreto verde e asfalto, de 350 a 600 mm, com dureza de segmento ajustada à aplicação.",
+        image: "/linhas/concreto-asfalto.webp",
+        pdf: "/catalogos/construcao-concreto-asfalto.pdf",
       },
     ],
   },
@@ -129,28 +137,38 @@ export const linhas: Linha[] = [
   },
   {
     slug: "pedras",
-    name: "Rochas Ornamentais",
+    name: "Pedras Naturais",
     image: "/cat-pedras.avif",
     subtitle: "Soluções para Corte, Perfuração, Desbaste, Polimento e Acabamento",
     cardDescription:
-      "Linha completa de ferramentas para mármores, granitos, quartzitos, quartzos, superfícies ultracompactas e demais rochas ornamentais.",
+      "Linha completa de ferramentas para mármores, granitos, quartzitos, quartzos, porcelanatos, superfícies ultracompactas e demais pedras naturais.",
     intro: [
-      "A Trust Tools oferece uma linha completa de ferramentas para processamento de mármores, granitos, quartzitos, quartzos, superfícies ultracompactas e demais rochas ornamentais.",
+      "A Trust Tools oferece uma linha completa de ferramentas para processamento de mármores, granitos, quartzitos, quartzos, porcelanatos, superfícies ultracompactas e demais pedras naturais.",
       "Nosso portfólio inclui discos diamantados, brocas, coroas, rebolos, pratos de desbaste, ferramentas de polimento e acessórios desenvolvidos para proporcionar máxima produtividade, excelente acabamento e longa vida útil.",
       "Atendemos marmorarias, beneficiadoras de pedras, fabricantes de superfícies especiais e profissionais que buscam precisão, qualidade e desempenho em cada etapa do processo.",
     ],
-    subcategoriasTitle: "Catálogo",
     subcategorias: [
       {
-        slug: "rochas-ornamentais",
-        name: "Ferramentas para Rochas Ornamentais",
-        description: "Discos, brocas, coroas, rebolos e ferramentas de polimento para mármores, granitos e quartzitos.",
+        slug: "serras-marmores-granitos",
+        name: "Serras para Mármores e Granitos",
+        description:
+          "Serras de 250 a 600 mm com alma de aço nova, versões silenciosas, para mármores nacionais e importados e granitos de média e alta dureza.",
+        image: "/linhas/serras-marmores-granitos.webp",
+        pdf: "/catalogos/pedras-serras-marmores-granitos.pdf",
+      },
+      {
+        slug: "marmores-granitos-porcelanato",
+        name: "Mármores, Granitos e Porcelanato",
+        description:
+          "Adaptadores escariadores, brocas de chanfro, serras copo, discos de corte e desbaste, lixas diamantadas, rebolos e ferramentas de medição.",
+        image: "/linhas/marmores-granitos-porcelanato.webp",
+        pdf: "/catalogos/pedras-marmores-granitos-porcelanato.pdf",
       },
     ],
   },
   {
     slug: "ferramentas-diversas",
-    name: "Ferramentas Profissionais",
+    name: "Ferramentas e Máquinas",
     image: "/cat-ferramentas-diversas.avif",
     subtitle: "Complementando Soluções para os Mais Diversos Segmentos",
     cardDescription:
@@ -196,32 +214,15 @@ export const linhas: Linha[] = [
       "Além da substituição dos segmentos, avaliamos as condições da ferramenta para garantir segurança, desempenho e máxima vida útil, contribuindo para a redução de desperdícios e para uma operação mais sustentável.",
       "Todo o processo é realizado seguindo rigorosos padrões de qualidade e segurança, assegurando confiabilidade e produtividade para nossos clientes.",
     ],
-    subcategoriasTitle: "O que recuperamos",
+    subcategoriasTitle: "Catálogo",
     subcategorias: [
       {
-        slug: "serras",
-        name: "Serras",
-        description: "Substituição dos segmentos e recuperação do núcleo de serras diamantadas de qualquer diâmetro.",
-      },
-      {
-        slug: "calices",
-        name: "Cálices",
-        description: "Repastilhamento de cálices diamantados para perfuração em concreto.",
-      },
-      {
-        slug: "coroas",
-        name: "Coroas",
-        description: "Recuperação de coroas diamantadas com novos segmentos e avaliação do tubo.",
-      },
-      {
-        slug: "fresas",
-        name: "Fresas",
-        description: "Repastilhamento e recuperação de fresas diamantadas.",
-      },
-      {
-        slug: "dressadores",
-        name: "Dressadores",
-        description: "Recuperação de dressadores diamantados para retificação.",
+        slug: "repastilhamento",
+        name: "Repastilhamento de Ferramentas Diamantadas",
+        description:
+          "Recuperamos serras, brocas, coroas, cálices, fresas, dressadores e outras ferramentas diamantadas. Menor custo, maior vida útil, menos descarte.",
+        image: "/linhas/repastilhamento.webp",
+        pdf: "/catalogos/repastilhamento.pdf",
       },
     ],
   },
