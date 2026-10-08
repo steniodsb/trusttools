@@ -80,6 +80,7 @@ export const linhas: Linha[] = [
         slug: "brocas",
         name: "Brocas",
         description: "Brocas diamantadas e de widia para concreto, alvenaria e pisos.",
+        image: "/linhas/brocas.webp",
       },
       {
         slug: "concreto-asfalto",
@@ -132,6 +133,7 @@ export const linhas: Linha[] = [
         slug: "refratarios",
         name: "Ferramentas para Refratários",
         description: "Discos, serras, brocas e segmentos para materiais refratários e cerâmicas técnicas.",
+        image: "/linhas/refratarios.webp",
       },
     ],
   },
