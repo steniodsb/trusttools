@@ -37,7 +37,7 @@ export const linhas: Linha[] = [
   {
     slug: "construcao",
     name: "Construção Civil",
-    image: "/cat-construcao.avif",
+    image: "/categorias/construcao.webp",
     subtitle: "Soluções para Concreto, Pré-Moldados, Lajes Alveolares e Pisos Industriais",
     cardDescription:
       "Linha completa de ferramentas para concreto armado, protendido, lajes alveolares, pré-moldados, alvenaria, pisos industriais e estruturas especiais.",
@@ -95,7 +95,7 @@ export const linhas: Linha[] = [
   {
     slug: "segmentos",
     name: "Segmentos Diamantados",
-    image: "/cat-segmentos.avif",
+    image: "/categorias/segmentos.webp",
     cardDescription:
       "Segmentos diamantados de alta performance desenvolvidos para maximizar produtividade, velocidade de corte e vida útil da ferramenta.",
     intro: [
@@ -118,7 +118,7 @@ export const linhas: Linha[] = [
   {
     slug: "refratarios",
     name: "Refratários",
-    image: "/cat-refratarios.avif",
+    image: "/categorias/refratarios.webp",
     subtitle: "Ferramentas para os Materiais Mais Exigentes da Indústria",
     cardDescription:
       "Soluções para corte, perfuração e desbaste de materiais refratários em fornos industriais, siderurgia, fundições, cimenteiras, vidro, alumínio e processos de alta temperatura.",
@@ -140,7 +140,7 @@ export const linhas: Linha[] = [
   {
     slug: "pedras",
     name: "Pedras Naturais",
-    image: "/cat-pedras.avif",
+    image: "/categorias/pedras.webp",
     subtitle: "Soluções para Corte, Perfuração, Desbaste, Polimento e Acabamento",
     cardDescription:
       "Linha completa de ferramentas para mármores, granitos, quartzitos, quartzos, porcelanatos, superfícies ultracompactas e demais pedras naturais.",
@@ -171,7 +171,7 @@ export const linhas: Linha[] = [
   {
     slug: "ferramentas-diversas",
     name: "Ferramentas e Máquinas",
-    image: "/cat-ferramentas-diversas.avif",
+    image: "/categorias/ferramentas-diversas.webp",
     subtitle: "Complementando Soluções para os Mais Diversos Segmentos",
     cardDescription:
       "Ampla variedade de ferramentas profissionais para construção civil, indústria, manutenção e oficinas especializadas.",
@@ -210,7 +210,7 @@ export const linhas: Linha[] = [
   {
     slug: "repastilhamento",
     name: "Repastilhamento",
-    image: "/cat-repastilhamento.avif",
+    image: "/categorias/repastilhamento.webp",
     subtitle: "Mais vida útil, menor custo operacional",
     cardDescription:
       "Serviços especializados de repastilhamento e recuperação de ferramentas diamantadas, com redução significativa de custos versus comprar novo.",
