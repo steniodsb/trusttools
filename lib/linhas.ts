@@ -185,19 +185,19 @@ export const linhas: Linha[] = [
         slug: "lixadeiras",
         name: "Lixadeiras",
         description: "Lixadeiras angulares e retas para corte e desbaste.",
-        image: "/linhas/refratarios.webp",
+        image: "/linhas/lixadeiras.webp",
       },
       {
         slug: "serra-marmore",
         name: "Serra Mármore",
         description: "Serras mármore para corte de pedras, cerâmicas e alvenaria.",
-        image: "/linhas/concreto-asfalto.webp",
+        image: "/linhas/serra-marmore.webp",
       },
       {
         slug: "roquite",
         name: "Roquite",
         description: "Linha Roquite de ferramentas profissionais.",
-        image: "/linhas/coroas.webp",
+        image: "/linhas/roquite.webp",
       },
       {
         slug: "ferramentas-gerais",
