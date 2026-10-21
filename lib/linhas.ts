@@ -203,7 +203,7 @@ export const linhas: Linha[] = [
         slug: "ferramentas-gerais",
         name: "Ferramentas em Geral e Manuais",
         description: "Discos, brocas, escovas, talhadeiras, ponteiros, acessórios e ferramentas manuais.",
-        image: "/linhas/brocas.webp",
+        image: "/linhas/ferramentas-gerais.webp",
       },
     ],
   },
