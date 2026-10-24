@@ -28,6 +28,11 @@ const slides: Slide[] = [
     title: "Soluções para construção civil, pré-fabricados e indústria",
     highlight: "construção civil",
   },
+  {
+    image: "/hero-copos.avif",
+    title: "Rebolos e copos diamantados para desbaste de concreto",
+    highlight: "desbaste de concreto",
+  },
 ];
 
 const diferenciais = [
