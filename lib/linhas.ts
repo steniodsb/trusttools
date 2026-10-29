@@ -159,11 +159,11 @@ export const linhas: Linha[] = [
         pdf: "/catalogos/pedras-serras-marmores-granitos.pdf",
       },
       {
-        slug: "marmores-granitos-porcelanato",
-        name: "Mármores, Granitos e Porcelanato",
+        slug: "diversos-pedras-pisos",
+        name: "Diversos para Pedras e Pisos",
         description:
           "Adaptadores escariadores, brocas de chanfro, serras copo, discos de corte e desbaste, lixas diamantadas, rebolos e ferramentas de medição.",
-        image: "/linhas/marmores-granitos-porcelanato.webp",
+        image: "/linhas/diversos-pedras-pisos.webp",
         pdf: "/catalogos/pedras-marmores-granitos-porcelanato.pdf",
       },
     ],
@@ -182,22 +182,11 @@ export const linhas: Linha[] = [
     ],
     subcategorias: [
       {
-        slug: "lixadeiras",
-        name: "Lixadeiras",
-        description: "Lixadeiras angulares e retas para corte e desbaste.",
-        image: "/linhas/lixadeiras.webp",
-      },
-      {
-        slug: "serra-marmore",
-        name: "Serra Mármore",
-        description: "Serras mármore para corte de pedras, cerâmicas e alvenaria.",
-        image: "/linhas/serra-marmore.webp",
-      },
-      {
-        slug: "roquite",
-        name: "Roquite",
-        description: "Linha Roquite de ferramentas profissionais.",
-        image: "/linhas/roquite.webp",
+        slug: "ferramentas-eletricas-pneumaticas",
+        name: "Ferramentas Elétricas e Pneumáticas",
+        description:
+          "Lixadeiras, serras mármore, esmerilhadeiras, furadeiras, parafusadeiras, moto esmeris, ferramentas pneumáticas e a linha Roquite.",
+        image: "/linhas/ferramentas-eletricas-pneumaticas.webp",
       },
       {
         slug: "ferramentas-gerais",
